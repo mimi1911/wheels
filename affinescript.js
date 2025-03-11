@@ -171,11 +171,12 @@ let animationChar;
 
   scaleFactor1_1.addEventListener('input', function (input) {
     let sf = parseInt(input.target.value); // Parse scaling factor
-    const outerWheel = container1_1.querySelector('.outer-wheel');
+    const innerWheel = container1_1.querySelector('.inner-wheel');
+    const centerWheel1_1 = container1_1.querySelector('.center-wheel');
 
     // If input is cleared, stop animation and clear wheel
     if (isNaN(sf)) {
-      outerWheel.innerHTML = ''; 
+      innerWheel.innerHTML = ''; 
       clearTimeout(animationChar);
       for (let i = 0; i < numSegments; i++){
         const li = document.createElement('li');
@@ -213,11 +214,12 @@ let animationChar;
 
   scaleFactor2.addEventListener('input', function (input) {
     let sf = parseInt(input.target.value); // Parse scaling factor
-    const outerWheel = container2.querySelector('.outer-wheel');
+    const innerWheel = container2.querySelector('.inner-wheel');
+    const centerWheel2 = container2.querySelector('.center-wheel');
 
     // If input is cleared, stop animation and clear wheel
     if (isNaN(sf)) {
-      outerWheel.innerHTML = ''; 
+      innerWheel.innerHTML = ''; 
       clearTimeout(animationChar);
       for (let i = 0; i < numSegments; i++){
         const li = document.createElement('li');
@@ -404,29 +406,10 @@ function affineWheel(container, charSet, numSegments, skewAngle, scalingFactor, 
       indexDiv.style.top = "55%";
 
       charIndex.appendChild(indexDiv);
-      innerLi.appendChild(charIndex);
+      outerLi.appendChild(charIndex);
   }
 
 
-    if (displayIndex) {
-        const indexDiv = document.createElement('div');
-        indexDiv.className = 'index';
-        indexDiv.textContent = i; // Display index if applicable
-        
-        const baseX = -45; 
-        const baseY = 50;
-        const xAdjust = -(numSegments - 25) * 1.5; 
-        const yAdjust = -(numSegments - 25) * 0.8;  
-        // Adjust rotation
-        const rotationAdjust = 10 + (numSegments - 26) * 0.5; 
-
-        indexDiv.style.transformOrigin = `${baseX + xAdjust}% ${baseY + yAdjust}%`;
-        indexDiv.style.transform = `translate(${baseX + xAdjust}%, ${baseY + yAdjust}%) rotate(${rotationAdjust}deg)`;
-
-        indexDiv.style.top = "48%";
-
-        outerLi.appendChild(indexDiv);  
-    }
     outerWheel.appendChild(outerLi);
     innerWheel.appendChild(innerLi);
   }
@@ -519,6 +502,28 @@ function affineWheel(container, charSet, numSegments, skewAngle, scalingFactor, 
     return;
 };
 
+function restartAnimation() {
+  const centerWheels = document.querySelectorAll('.center-wheel');
+  // const centerWheel1 = container1.querySelector('.center-wheel');
+  // const centerWheel1_1 = container1_1.querySelector('.center-wheel');
+  innerWheel.innerHTML = ''; // Clear inner wheel before starting new animation
+  usedPositions.clear(); // Reset used positions
+  revealChar(0);
+  for (let i = 0; i < numSegments; i++){
+    const li = document.createElement('li');
+    const rotateAngle = (360 / numSegments) * i; 
+    li.style.transform = `rotate(${rotateAngle}deg) skewY(${skewAngle}deg)`;
+    innerWheel.appendChild(li);
+  };
+  for (let i = 0; i < centerWheels.length; i++) {
+    innerWheel.appendChild(centerWheels[i].cloneNode(true));
+}
+}
+
+// Delay reading the scaling factor input to allow user input to come through
+sfTimeout = setTimeout(() => {
+  restartAnimation();
+}, 300);
 
   // We don't use it yet but stores all the unique affine indexes (positions) (until there is an overlap)
   let usedPositions = new Set();
@@ -539,6 +544,10 @@ function affineWheel(container, charSet, numSegments, skewAngle, scalingFactor, 
       return;
     };
 
+    if (animationChar) {
+      clearTimeout(animationChar);
+    }
+
     // Simple affine index
     let position = (i * scalingFactor) % numSegments;
 
@@ -553,6 +562,26 @@ function affineWheel(container, charSet, numSegments, skewAngle, scalingFactor, 
     charDiv.className = 'char';
     charDiv.textContent = char;
     innerLi.appendChild(charDiv);
+
+    if (displayIndex) {
+      const indexDiv = document.createElement('div');
+      indexDiv.className = 'index';
+      indexDiv.textContent = i; // Display index if applicable
+      
+      const baseX = -45; 
+      const baseY = 50;
+      const xAdjust = -(numSegments - 25) * 1.5; 
+      const yAdjust = -(numSegments - 25) * 0.8;  
+      // Adjust rotation
+      const rotationAdjust = 10 + (numSegments - 26) * 0.5; 
+
+      indexDiv.style.transformOrigin = `${baseX + xAdjust}% ${baseY + yAdjust}%`;
+      indexDiv.style.transform = `translate(${baseX + xAdjust}%, ${baseY + yAdjust}%) rotate(${rotationAdjust}deg)`;
+
+      indexDiv.style.top = "48%";
+
+      innerLi.appendChild(indexDiv);  
+  }
 
     innerWheel.appendChild(innerLi);
       

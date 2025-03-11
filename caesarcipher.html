@@ -17,16 +17,19 @@
         </div>
 
         <h1 style="font-size: 45px;">Caesar Cipher</h1>
-        <p><strong>Now let's learn about Caesar Cipher!</strong></p>
-        <p>Imagine you have a secret message that you want to send to your friend. 
+        <p><strong>Agents! First we need you to earn a mastery in Caesar Cipher!</strong></p>
+        <p>As secret agents we may need to send secret messages. If someone else steals and 
+            reads the messages, it could cause danger to you and our team. So we must ensure 
+            that our messages be protected from the bad guys. Here we will use the 
+        Caesar Cipher!</p>
+        <!-- <p>Imagine you have a secret message that you want to send to your friend. 
             What if someone else steals and reads your secret message? How can your 
-            messages be protected?</p>
+            messages be protected?</p> -->
         <h2 style="font-size: 30px;">How does Caesar Cipher work?</h2>
         <p>Caesar Cipher works by shifting the alphabet set by a certain number of positions. 
             You can do this by choosing a special key, then using that to find the corresponding 
-            letter, and repeat this to encrypt the whole message.
-        </p>
-        <button class="btn" onclick="appearDisappearText()" style="font-size: 15px;">Learn more about Caesar cipher!</button>
+            letter, and repeat this to encrypt the whole message. </p>
+        <button class="btn" onclick="appearDisappearText()" style="font-size: 15px;">Learn more about Caesar cipher</button>
         <p id="hiddenText">Caesar cipher is a way to encode the message so only the people with the 
             special key can access the original message called the <strong>plaintext</strong>. <br>
             This enciphering method is named after Roman leader Julius Caesar, who used 
@@ -44,8 +47,21 @@
             <strong>Encrypt your message:</strong> To encode your whole message, repeat this process for every 
             letter of your plaintext.<br>
         </p> -->
-        <h3 style="font-size: 30px;">Try these simple steps to encode your message!</h3>
-           <p style="font-size: 20px; background-color: rgb(173, 217, 250);"><strong>1. Type in the key</strong> you want (e.g. 3)<br></p>
+
+
+        <div class="toggle-instructions" onclick="toggleInstructions('container1')">
+            <div class="instruction-title" style="font-size: 30px; font-family: Verdana, Geneva, Tahoma, sans-serif; margin-left: 20px;">⭐ Mission 1: Encode your message!<br></div>
+                <div style="font-size: 15px; font-family: Verdana, Geneva, Tahoma, sans-serif; margin: 40px;" >Click here for instructions on turning your messages into secret coded messages <span id="arrow-container1">▾</span></div>
+            <div class="instruction-content" id="instructions-container1">
+                <p id="instruction-text-container1"></p>
+                <div class="nav-buttons">
+                    <button class="nav-btn" onclick="prevStep(event, 'container1')">⬅️ Back</button>
+                    <button class="nav-btn" onclick="nextStep(event, 'container1')">Next ➡️</button>
+                </div>
+            </div>
+        </div>
+        
+            <!-- <p style="font-size: 20px; background-color: rgb(173, 217, 250);"><strong>1. Type in the key</strong> you want (e.g. 3)<br></p>
             <p style="margin-top: 0px; margin-left: 55px;">The <strong>key</strong> determines how many positions the letters of an 
             alphabet set will shift. For example, if the key is 3, each letter will move 3 
             positions to the right, wrapping around at the end of the alphabet. For example, 
@@ -59,7 +75,7 @@
             the grey inner-wheel, which represents the original alphabet set (or the <strong>plaintext</strong>), then replacing it 
             with the corresponding letter on the light blue outer-wheel, which represents the 4
             shifted alphabet set (or the <strong>ciphertext</strong>). Repeat this until you get the enciphered text yourself!</p>
-        </p>
+        </p> -->
         <p><strong>Challenge/food for thought:</strong> What happens if you set the key to be bigger than 26 (e.g. 29)?
              What do you notice?
         </p>
@@ -84,6 +100,17 @@
                 </div>
             </div>
 
+            <div class="toggle-instructions" onclick="toggleInstructions('container1_1')">
+                <div class="instruction-title" style="font-size: 30px; font-family: Verdana, Geneva, Tahoma, sans-serif; margin-left: 20px;">⭐ Mission 2: Decode to get your original message!</div>
+                    <div style="font-size: 15px; font-family: Verdana, Geneva, Tahoma, sans-serif; margin: 40px;" >Click here for instructions on decoding your encoded messages into your original message <span id="arrow-container1_1">▾</span></div>
+                <div class="instruction-content" id="instructions-container1_1">
+                    <p id="instruction-text-container1_1"></p>
+                    <div class="nav-buttons">
+                        <button class="nav-btn" onclick="prevStep(event, 'container1_1')">⬅️ Back</button>
+                        <button class="nav-btn" onclick="nextStep(event, 'container1_1')">Next ➡️</button>
+                    </div>
+                </div>
+            </div>    
 
         <div id="container1_1" class="container" style = "position: relative">
             <div class="wheel-wrapper" style = "position: relative; height: 900px"></div>
@@ -106,7 +133,7 @@
                 </div>
             </div>
         
-        <h4 style="font-size: 30px;">Now try if you can do it on your own!!</h4>
+        <!-- <h4 style="font-size: 30px;">Now try if you can do it on your own!!</h4>
         <p style="font-size: 20px; background-color: rgb(173, 217, 250);"><strong>1. Type in the key</strong><br></p>
         <p style="margin-top: 0px; margin-left: 55px;">This part is the same as the exercise above<br></p>
             <p style="font-size: 20px; background-color: rgb(173, 217, 250);"><strong>2. Type in the plaintext message</strong> you want to encipher in the left textbox (e.g. "I 
@@ -114,8 +141,20 @@
             <p style="margin-top: 0px; margin-left: 55px;">(<strong>Tip: </strong> Try not to make the plaintext too long!) <br></p>
             <p style="font-size: 20px; background-color: rgb(173, 217, 250);"><strong>3. Guess the enciphered message!</strong><br></p>
             <p style="margin-top: 0px; margin-left: 55px;">Type what you think it will be in the right textbox!</p>
-            </p>
+            </p> -->
 
+
+        <div class="toggle-instructions" onclick="toggleInstructions('container2')">
+            <div class="instruction-title" style="font-size: 30px; font-family: Verdana, Geneva, Tahoma, sans-serif; margin-left: 20px;">⭐ Mission 3: Try encoding the message by yourself!</div>
+                <div style="font-size: 15px; font-family: Verdana, Geneva, Tahoma, sans-serif; margin: 40px;" >Click here for instructions on encoding your message from your original message <span id="arrow-container2">▾</span></div>
+            <div class="instruction-content" id="instructions-container2">
+                <p id="instruction-text-container2"></p>
+                <div class="nav-buttons">
+                    <button class="nav-btn" onclick="prevStep(event, 'container2')">⬅️ Back</button>
+                    <button class="nav-btn" onclick="nextStep(event, 'container2')">Next ➡️</button>
+                </div>
+            </div>
+        </div>
         
         <div id="container2" class="container" style = "position: relative">
             <div class="wheel-wrapper" style = "position: relative; height: 900px"></div>
@@ -139,15 +178,27 @@
                 </div>
             </div>
 
+            <div class="toggle-instructions" onclick="toggleInstructions('container3')">
+                <div class="instruction-title" style="font-size: 30px; font-family: Verdana, Geneva, Tahoma, sans-serif; margin-left: 20px;">⭐ Mission 4: Can we encode numbers?</div>
+                    <div style="font-size: 15px; font-family: Verdana, Geneva, Tahoma, sans-serif; margin: 40px;" >Click here for instructions on how to encode numbers <span id="arrow-container3">▾</span></div>
+                <div class="instruction-content" id="instructions-container3">
+                    <p id="instruction-text-container3"></p>
+                    <div class="nav-buttons">
+                        <button class="nav-btn" onclick="prevStep(event, 'container3')">⬅️ Back</button>
+                        <button class="nav-btn" onclick="nextStep(event, 'container3')">Next ➡️</button>
+                    </div>
+                </div>
+            </div>
+
 
             <div id="container3" class="container" style = "position: relative">
                 <div class="wheel-wrapper" style = "position: relative; height: 900px"></div>
                     <!-- <textarea id="inputText" placeholder="Enter text to encrypt..." right="0px" oninput="setTimeout(encryptText,1500)"></textarea>
                     <textarea style="position: absolute; right: 0px" id="outputText" placeholder="Encrypted text will appear here..." readonly ></textarea> -->
                     <div id="encryptionColour" style="margin-top: 10px;"></div> <!-- For highlighted characters -->
-                    <textarea id="inputText3" style = "position: absolute; bottom: 80px; left: 0px" class="fixed-input-copy" placeholder="Enter text that you want to try to encrypt..."  oninput="caesarNumCipherRed('inputText3', 'key3', 26, 'userOutputText3', 'workingOut3'); highlightInput(container3, inputText3)"></textarea><br> <!--oninput="encryptText(container2, key2, inputText2, userOutputText2)"-->
+                    <textarea id="inputText3" style = "position: absolute; bottom: 80px; left: 0px" class="fixed-input-copy" placeholder="Enter the number that you want to try to encrypt..."  oninput="caesarNumCipherRed('inputText3', 'key3', 26, 'userOutputText3', 'workingOut3'); highlightInput(container3, inputText3)"></textarea><br> <!--oninput="encryptText(container2, key2, inputText2, userOutputText2)"-->
                     <p id="workingOut3" style="right: 80px; bottom: 300px; color: blue" text-align="center"></p>
-                    <textarea id="userOutputText3" style="position: absolute; bottom: 80px; right: 0px" class="userEncryptText" placeholder="Try to encrypt the text here..." oninput="checkEncipher(container3, key3, inputText3, userOutputText3)" ></textarea>
+                    <textarea id="userOutputText3" style="position: absolute; bottom: 80px; right: 0px" class="userEncryptText" placeholder="Encrypted number will appear here..." oninput="checkEncipher(container3, key3, inputText3, userOutputText3)" ></textarea>
                     <!-- <button style="position: absolute; right: 10px; bottom: 235px;" type="submit">Submit</button> -->
                     <p style="position: absolute; right: 80px; bottom: 300px" id="message" text-align="center"> </p>
                     <div id="comparisonResult"></div>
@@ -162,7 +213,21 @@
                         <h1>Enter the shift: <br> <input placeholder="0" id="key3" class="key" > <br>  </h1>
                     </div>
                 </div>
+
+                <p><strong>Food for thought:</strong> Modulus is a little bit like remainders but with a little more sparkle ✨</p>
         
+
+                <div class="toggle-instructions" onclick="toggleInstructions('container4')">
+                    <div class="instruction-title" style="font-size: 30px; font-family: Verdana, Geneva, Tahoma, sans-serif; margin-left: 20px;">⭐ Mission 5: Modulo NOT 26 😎</div>
+                        <div style="font-size: 15px; font-family: Verdana, Geneva, Tahoma, sans-serif; margin: 40px;" >Click here for instructions on how to encode numbers with modulus not 26 <span id="arrow-container4">▾</span></div>
+                    <div class="instruction-content" id="instructions-container4">
+                        <p id="instruction-text-container4"></p>
+                        <div class="nav-buttons">
+                            <button class="nav-btn" onclick="prevStep(event, 'container4')">⬅️ Back</button>
+                            <button class="nav-btn" onclick="nextStep(event, 'container4')">Next ➡️</button>
+                        </div>
+                    </div>
+                </div>
 
                 <div id="container4" class="container" style = "position: relative">
                     <div class="wheel-wrapper" style = "position: relative; height: 900px"></div>

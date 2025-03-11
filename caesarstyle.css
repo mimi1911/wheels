@@ -44,6 +44,18 @@ p {
   cursor: pointer;
 }
 
+.nav-btn {
+  background-color: rgb(173, 217, 250); 
+  color: black;
+  margin: 35px;
+  width: 100px;
+  max-height:30px;
+  font-size: 15px;
+  text-align: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  cursor: pointer;
+}
+
 #hiddenText {
   display: none; /* Start hidden */
   margin-top: 10px;

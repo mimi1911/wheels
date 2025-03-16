@@ -11,6 +11,7 @@ const container1_1 = document.getElementById('container1_1');
 const container2 = document.getElementById('container2');
 const container3 = document.getElementById('container3');
 const container4 = document.getElementById('container4');
+const container5 = document.getElementById('container5');
 const inputText1 = document.getElementById('inputText1');
 const outputText1 = document.getElementById('outputText1');
 const keyInput1 = document.getElementById('key1');
@@ -23,9 +24,12 @@ const inputText3 = document.getElementById('inputText3');
 const userOutputText3 = document.getElementById('userOutputText3');
 const inputText4 = document.getElementById('inputText4');
 const userOutputText4 = document.getElementById('userOutputText4');
+const inputText5 = document.getElementById('inputText5');
+const userOutputText5 = document.getElementById('userOutputText5');
 const keyInput2 = document.getElementById('key2');
 const keyInput3 = document.getElementById('key3');
 const keyInput4 = document.getElementById('key4');
+const keyInput5 = document.getElementById('key5');
 const workingOut3 = document.getElementById('workingOut3');
 const workingOut4 = document.getElementById('workingOut4');
 // Not a constant value, the mod needs to update as we move the slider
@@ -1010,3 +1014,125 @@ function delayTimer() {
         //     }
         // }
         // result.push(shiftedNum);}
+
+  function subtractionTable() {
+    let bar = parseInt(document.getElementById("subtractionSlider").value);
+    document.getElementById("subtractionValue").textContent = bar;
+    let topRow = document.getElementById("topRow");
+    let bottomRow = document.getElementById("bottomRow");
+    
+    topRow.innerHTML = "";
+    bottomRow.innerHTML = "";
+
+    
+    for (let i = 0; i < bar; i++) {
+        let cell = document.createElement("td");
+        cell.textContent = i;
+        if (bar > 35){
+          cell.style.fontSize = "14px";
+        }
+        if (bar > 40){
+          cell.style.fontSize = "10px";
+        }
+        bottomRow.appendChild(cell);
+    }
+    
+    for (let i = bar; i < 2 * bar; i++) {
+        let cell = document.createElement("td");
+        cell.textContent = i;
+        if (bar > 35){
+          cell.style.fontSize = "14px";
+        }
+        if (bar > 40){
+          cell.style.fontSize = "10px";
+        }
+        topRow.appendChild(cell);
+
+    }
+  }
+subtractionTable()
+
+function checkEncipherNum(inputText, keyInput, outputText, workingOutId){
+    const messageElement = document.getElementById('messageNum');  
+    let numStr = document.getElementById(inputText).value.trim();
+    // Converts it to integer
+    let shift = parseInt(document.getElementById(keyInput).value);
+    let modValue = parseInt(document.getElementById("subtractionSlider").value);
+    let workingOut = document.getElementById(workingOutId);
+    let userAttempt = document.getElementById(outputText).value.trim();
+
+    let numbers = numStr.split(" ");
+    let userNumbers = userAttempt.split(" ");
+    
+    // caesarNumCipherMod(inputText, shift, modValue, outputText, workingOut);
+
+    /* Check if the user's input matches the correct cipher */
+    // Checks for empty inputs
+    if (numStr === "" && userAttempt === "") {
+      // Clear message
+      messageElement.innerHTML = ""; 
+      return;
+    }
+
+
+
+
+    if (numbers.length !== userNumbers.length) {
+      messageElement.innerHTML = "Please enter both numbers.";
+      // messageElement.textContent = '';
+      return;
+    }
+
+    let isCorrect = true;
+
+
+    for (let i = 0; i < numbers.length; i++) {
+      let inputNum = parseInt(numbers[i]);
+      let outputNum = parseInt(userNumbers[i]);
+
+      if (isNaN(inputNum) || isNaN(outputNum)) {
+        messageElement.innerHTML = "Please type numbers only!";
+        messageElement.style.color = "red";
+        return;
+      }
+
+      let correctEnc = inputNum + shift;
+      while (correctEnc >= modValue) {
+        correctEnc -= modValue;
+      }
+
+      if (correctEnc !== outputNum) {
+        isCorrect = false; 
+      }
+
+    }
+
+      if (isCorrect) {
+        messageElement.innerHTML = "Correct Encipher Text!";
+        messageElement.style.color = "Green";
+        workingOut.innerHTML = `<strong>Magical Steps for Encryption:</strong><br>Input Number: ${num}`;
+      } else {
+          messageElement.innerHTML = "Incorrect Encipher Number. <br>Please try again.";
+          messageElement.style.color = "red";
+      }
+
+    }
+
+
+    // The message only appears when the user Enciphered Input length matches the length of the plaintext   
+    // else if (userEnInput.length >= correctEnc.length) {
+        // if (outputNum === correctEnc) {
+        //     messageElement.innerHTML = "Correct Encipher Number!";
+        //     messageElement.style.color = "green"; 
+        // } 
+        // else {
+        //         messageElement.innerHTML = "Incorrect Encipher Number. <br>Please try again.";
+        //         messageElement.style.color = "red"; 
+        //     }
+  
+
+
+
+    // Clears the message when user Enciphered Input is shorter than the plaintext
+    // else if (userEnInput.length < userOgInput.length) {
+    // messageElement.textContent = '';}

@@ -256,6 +256,34 @@
                             <p style="position: relative; left: -30px; bottom: 0px;">Number of Segments: <span id="segmentValue"> 26</span></p>
                         </div>
                     </div>
+
+
+                    <div id="container5" class="container" style = "position: relative">
+                        <div class="wheel-wrapper" style = "position: relative; height: 900px"></div>
+                            <!-- <div id="encryptionColour" style="margin-top: 10px;"></div> For highlighted characters -->
+                            <textarea id="inputText5" style = "position: absolute; top: 600px; left: 50px" class="fixed-input-copy" placeholder="Enter number that you want to try to encrypt..."  oninput="caesarNumCipherMod('inputText5', 'key5', mod, 'userOutputText5', 'workingOut5');"></textarea><br>
+                            <textarea id="userOutputText5" style="position: absolute; top: 600px; right: 85px" class="userEncryptText" placeholder="Try to encrypt the number here..." oninput="checkEncipherNum('inputText5', 'key5', 'userOutputText5', 'workingOut5')" ></textarea>
+                            <!-- This was commented from before <button style="position: absolute; right: 10px; bottom: 235px;" type="submit">Submit</button> -->
+                            <p id="workingOut5" style="right: 80px; bottom: 0px; color: blue" text-align="center"></p>
+                            <p style="position: absolute; right: 120px; top: 500px" id="messageNum" text-align="center"> </p>
+                            <!-- <div id="comparisonResult"></div> -->
+                        
+                            <div class="key-info" style="top: 100px; border-color: black;">
+                                <h1 style="color: black;">Enter the shift: <br> <input placeholder="0" id="key5" class="key" style="border-color: black;"> <br>  </h1>
+                            </div>
+                            <div style="position: relative; left: 40px; top: -1000px; margin-bottom: 5px;">
+                                <label for="subtractionSlider"> Subtraction table modulus: </label>
+                                <input type="range" id="subtractionSlider" min="2" max="45" value="26" step="1" oninput="subtractionTable()">
+                                <p style="position: relative; left: -30px; bottom: 0px;">Number of Segments: <span id="subtractionValue"> 26</span></p>
+                                <table>
+                                    <tbody>
+                                        <tr id="topRow"></tr>
+                                        <tr id="bottomRow"></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+               
            
 
     

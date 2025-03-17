@@ -981,6 +981,7 @@ function delayTimer() {
         }
         // Initialisation, starts from index 0
         increaseIndexMod(0)
+    }
 
     // When space key is pressed inside inputText3, clears working out with delay
     inputText3.addEventListener("keydown", function(event) {

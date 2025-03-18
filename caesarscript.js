@@ -370,7 +370,7 @@ function caesarWheel(container, charSet, numSegments, skewAngle){
     }
 }
 
-let stepInstructions = { "container1": 0, "container1_1": 0, "container2": 0 };
+let stepInstructions = { "container1": 0, "container1_1": 0, "container2": 0, "container3": 0, "container4": 0, "container5": 0 };
 
 // Instruction steps
 let instructions = {
@@ -409,7 +409,7 @@ let instructions = {
     <strong>Step 2.</strong> Get the <strong>plaintext</strong> back! </span> <br><br>
     Try to change the <strong>shift key</strong> and see if you can get your original message back.`,
     `<span style="font-size: 20px; background-color: rgb(173, 217, 250); padding: 2px 5px; border-radius: 5px; display: block;">
-    <strong>Step 3:</strong> Did you get the key?</span> <br><br>
+    <strong>Step 3.</strong> Did you get the key?</span> <br><br>
     <strong>Mission 2 Complete! 🏅 </strong><br>
     If you managed to get your key, did you notice something special about the number?
     <br><br> New emoji unlocked: 😉`,
@@ -423,10 +423,10 @@ let instructions = {
     Type in the <strong>plaintext message</strong> you want to encipher in the left textbox (e.g. "Hello")<br>
     <strong>Tip: </strong> Try not to make the plaintext too long! Try typing your favourite word 😉 <br>`,
     `<span style="font-size: 20px; background-color: rgb(173, 217, 250); padding: 2px 5px; border-radius: 5px; display: block;">
-    <strong>Step 3:</strong> Guess the enciphered message!</span> <br><br>
+    <strong>Step 3.</strong> Guess the enciphered message!</span> <br><br>
     Type what you think it will be in the right textbox!`,
     `<span style="font-size: 20px; background-color: rgb(173, 217, 250); padding: 2px 5px; border-radius: 5px; display: block;">
-    <strong>Step 4:</strong> Did you get it right?</span> <br><br>
+    <strong>Step 4.</strong> Did you get it right?</span> <br><br>
     <strong>Mission 3 Complete! 🏅 </strong> <br>
     Now you know how to encode your messages on your own!
     <br><br> New emoji unlocked: ✨`,
@@ -434,15 +434,17 @@ let instructions = {
   "container3": [
     `<span style="font-size: 20px; background-color: rgb(173, 217, 250); padding: 2px 5px; border-radius: 5px; display: block;">
     <strong>Step 1.</strong> Lets find out how to encrypt numbers </span> <br><br>
-    Type in the key. I'm sure you knew what was coming by now 😉`,
+    Type in the key (the key is b in x + b mod m). I'm sure you knew what was coming by now 😉`,
     `<span style="font-size: 20px; background-color: rgb(173, 217, 250); padding: 2px 5px; border-radius: 5px; display: block;">
     <strong>Step 2.</strong> You guessed it...! ✨ </span> <br><br>
-    Type in the number you want to encrypt.`,
+    Type in the number you want to encrypt.
+    <br> (This is the x in x + b mod m)`,
     `<span style="font-size: 20px; background-color: rgb(173, 217, 250); padding: 2px 5px; border-radius: 5px; display: block;">
-    <strong>Step 3: ✨ Magical Steps for Encryption ✨ </strong> </span> <br><br>
-    This is actually called <strong> ✨ working out the modulus ✨</strong> in maths! 😉`,
+    <strong>Step 3. ✨ Magical Steps for Encryption ✨ </strong> </span> <br><br>
+    This is actually called <strong> ✨ working out the modulus ✨</strong> in maths! 😉
+    <br> (This is the m in x + b mod m! mod is short for modulus😉✨)`,
     `<span style="font-size: 20px; background-color: rgb(173, 217, 250); padding: 2px 5px; border-radius: 5px; display: block;">
-    <strong>Step 4:</strong> Try other numbers!</span> <br><br>
+    <strong>Step 4.</strong> Try other numbers!</span> <br><br>
     <strong>Mission 4 Complete! 🏅 </strong> <br>
     You might not need to know it now, but wasn't too bad right? 😉
     <br><br> New emoji unlocked: 😎`,
@@ -455,16 +457,38 @@ let instructions = {
     <strong>Step 2.</strong> Type in the key ✨ </span> <br><br>
     Don't worry, this step was coming 😉`,
     `<span style="font-size: 20px; background-color: rgb(173, 217, 250); padding: 2px 5px; border-radius: 5px; display: block;">
-    <strong>Step 3: ✨ Magical Steps for Encryption ✨ </strong> </span> <br><br>
+    <strong>Step 3. ✨ Magical Steps for Encryption ✨ </strong> </span> <br><br>
     It now does the reducing step in one go, but I trust you have learned that from Mission 4 😎✨
     <br> The rest of the steps are actually the same as Mission 4. Isn't that easy? 😉`,
     `<span style="font-size: 20px; background-color: rgb(173, 217, 250); padding: 2px 5px; border-radius: 5px; display: block;">
-    <strong>Step 4:</strong> Try other modulus!</span> <br><br>
+    <strong>Step 4.</strong> Try other modulus!</span> <br><br>
     <strong>Mission 5 Complete! 🏅 </strong> <br>
     Well done agents!! ✨✨ 
     <br> You have now completed the Caesar Cipher stage!! Mastery in caesar cipher is only done by the tough 😎
     <br> Ready to go to Simple Affine Cipher stage now...? 😉 I know you can do it!! All the best, agents 😎✨
-    <br><br> New emoji unlocked: 😎`,
+    <br><br> New emoji unlocked: 😲`,
+  ],
+  "container5": [
+    `<span style="font-size: 20px; background-color: rgb(173, 217, 250); padding: 2px 5px; border-radius: 5px; display: block;">
+    <strong>Step 1.</strong> Everything is the same 😎 </span> <br><br>
+    The steps are the same as the previous missions!✨ <br>
+    Choose the modulus in the modulus bar, choose the shift and simply input the number you want to work out the modulus of. 😉`,
+    `<span style="font-size: 20px; background-color: rgb(173, 217, 250); padding: 2px 5px; border-radius: 5px; display: block;">
+    <strong>Step 2.</strong> Subtraction Table 😲✨ </span> <br><br>
+    You can use the subtraction table to reduce bigger numbers 😎
+    <br> This means if your number is bigger than your modulus (e.g. 36 mod 26) then you can change the modulus bar to 26, 
+    then look at the number right below 36 (this is 36 - 26 so it saves you from doing the reduction maths)! 😲✨ Wow Isn't 
+    that helpful! ✨😲✨`,
+    `<span style="font-size: 20px; background-color: rgb(173, 217, 250); padding: 2px 5px; border-radius: 5px; display: block;">
+    <strong>Step 3.</strong> ✨ Did you get it right? 😎✨ </span> <br><br>
+    Type in the answer you think it is in the right textarea 😉
+    <br> You can type more than one numbers in the <strong>left textbox</strong> separated by spaces.
+    <br> See if you can get them all right 😲✨`,
+    `<span style="font-size: 20px; background-color: rgb(173, 217, 250); padding: 2px 5px; border-radius: 5px; display: block;">
+    <strong>Step 4.</strong> ✨✨Are you ready to move to the next level? ✨✨</span> <br><br>
+    <strong>Mission 6 Complete! 🏅 </strong> <br>
+    <br> You have now completed the Caesar Cipher stage!!😲 Mastery in caesar cipher is only done by the tough 😎
+    <br> Ready to go to Simple Affine Cipher stage now...? 😉 I know you can do it!! All the best, agents 😎✨`,
   ],
 };
 

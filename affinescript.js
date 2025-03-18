@@ -1194,6 +1194,118 @@ function disableInputs(checker) {
         }
     }
 
+let stepInstructions = { "container1": 0, "container1_1": 0, "container2": 0, "container3": 0, "container4": 0, "container5": 0 };
+
+// Instruction steps
+let instructions = {
+  "container1": [
+      `<span style="font-size: 20px; background-color: rgb(173, 217, 250); padding: 2px 5px; border-radius: 5px; display: block;">
+      <strong>Step 1.</strong> Type in the <strong>jumping factor ✨</strong> you want (e.g. 2)</span> <br><br>
+      You want to encode your message so it is a problem if it crashes and doesn't give you all the 
+      alphabet sets that you want 😲  
+      <br><br> <strong>What numbers work?😲  Why do you think it works?😲 </strong>
+      <strong>Step 2.</strong> Type in the <strong>key</strong> you want (e.g. 5)</span> <br><br>
+      This part is exactly the same as what you did in the caesar cipher 😉✨<br>`,
+      `<span style="font-size: 20px; background-color: rgb(173, 217, 250); padding: 2px 5px; border-radius: 5px; display: block;">
+      <strong>Step 3.</strong> Type in the <strong>plaintext message</strong> you want to encipher in the left textbox <br>
+      (e.g. "My name is __") </span> <br><br>
+       <strong>Tip: </strong> Type slowly too see the letter from the plaintext highlight in red with the 
+       corresponding ciphertext highlight in yellow! 😎<br>`,
+      `<span style="font-size: 20px; background-color: rgb(173, 217, 250); padding: 2px 5px; border-radius: 5px; display: block;">
+      <strong>Step 4. The enciphered message</strong> will appear in the right textbox </span> <br><br> 
+      Check if you get the same encoding by finding the letter you want to encipher on 
+      the grey inner-wheel, which represents the original alphabet set (or the <strong>plaintext</strong>), then replacing it 
+      with the corresponding letter on the light blue outer-wheel, which represents the 4
+      shifted alphabet set (or the <strong>ciphertext</strong>).`,
+      `<span style="font-size: 20px; background-color: rgb(173, 217, 250); padding: 2px 5px; border-radius: 5px; display: block;">
+      <strong>Step 5:</strong> Repeat this until you get the enciphered text yourself! </span> <br><br>
+      <strong>Mission 1 Complete! 🏅</strong> <br>You can now encode your message using the simple affine cipher wheel.
+      <br><br> New emoji unlocked: 🔥`,
+  ],
+  "container1_1": [
+    `<span style="font-size: 20px; background-color: rgb(173, 217, 250); padding: 2px 5px; border-radius: 5px; display: block;">
+    <strong>Step 1.</strong> Type in the <strong>secret message</strong> </span> <br><br>
+    Type in the encrypted message from Mission 1.😉`,
+    `<span style="font-size: 20px; background-color: rgb(173, 217, 250); padding: 2px 5px; border-radius: 5px; display: block;">
+    <strong>Step 2.</strong> Get the <strong>plaintext</strong> back! 😎🔥</span> <br><br>
+    Try to change the <strong>shift key</strong> and see if you can get your original message back.`,
+    `<span style="font-size: 20px; background-color: rgb(173, 217, 250); padding: 2px 5px; border-radius: 5px; display: block;">
+    <strong>Step 3.</strong> Did you get the original message back? 😲</span> <br><br>
+    If not that's okay!😉✨ Go check out the hints if you want to satisfy your curious minds🔥
+    <br><br> You must have noticed it's not very easy to get back your original message than in the ceasar cipher exercise.
+    <br> This just proves simple affine cipher is <strong>much safer</strong> and <strong>more protected</strong>!!😲🔥  
+    <strong>Mission 2 Complete! 🏅 </strong><br>
+    If you managed to get your jumping size or key, did you notice something special about the number?
+    <br><br> New emoji unlocked: 🤖`,
+  ],
+  "container2": [
+    `<span style="font-size: 20px; background-color: rgb(173, 217, 250); padding: 2px 5px; border-radius: 5px; display: block;">
+    <strong>Step 1.</strong> Type in the <strong>jumping size</strong>🤖 </span> <br><br>
+    This part is the same as the Mission 1 😉`,
+    `<span style="font-size: 20px; background-color: rgb(173, 217, 250); padding: 2px 5px; border-radius: 5px; display: block;">
+    <strong>Step 2.</strong> Type in the <strong>shift</strong>🤖 </span> <br><br>
+    Also same as the Mission 1 😲🔥`,
+    `<span style="font-size: 20px; background-color: rgb(173, 217, 250); padding: 2px 5px; border-radius: 5px; display: block;">
+    <strong>Step 3.</strong> Type in the <strong>original message</strong>🤖 </span> <br><br>
+    Type in the <strong>plaintext message</strong> you want to encipher in the left textbox (e.g. "Hello")<br>
+    <strong>Tip: </strong> Try not to make the plaintext too long! Try typing your favourite word 🤖✨ <br>`,
+    `<span style="font-size: 20px; background-color: rgb(173, 217, 250); padding: 2px 5px; border-radius: 5px; display: block;">
+    <strong>Step 4.</strong> Guess the enciphered message! 🤖</span> <br><br>
+    Type what you think it will be in the right textbox!😉`,
+    `<span style="font-size: 20px; background-color: rgb(173, 217, 250); padding: 2px 5px; border-radius: 5px; display: block;">
+    <strong>Step 5.</strong> Did you get it right? 🤖</span> <br><br>
+    <strong>Mission 3 Complete! 🏅 </strong> <br>
+    Now you know how to encode your messages on your own!
+    <br><br> New emoji unlocked: 🍔`,
+  ],
+}
+
+function toggleInstructions(container) {
+  let content = document.getElementById(`instructions-${container}`);
+  let arrow = document.getElementById(`arrow-${container}`);
+
+    if (window.getComputedStyle(content).display !== "none") {
+        content.style.display = "none";
+        arrow.innerHTML = "▾";
+    } else {
+        stepInstructions[container] = 0;
+        document.getElementById(`instruction-text-${container}`).innerHTML = instructions[container][stepInstructions[container]];
+        content.style.display = "block";
+        arrow.innerHTML = "▴"; 
+    }
+}
+
+function nextStep(event, container) {
+    event.stopPropagation(); // Prevent toggle box from closing
+    if (stepInstructions[container] < instructions[container].length - 1) {
+        stepInstructions[container]++;
+        document.getElementById(`instruction-text-${container}`).innerHTML = instructions[container][stepInstructions[container]];
+    }
+}
+
+function prevStep(event, container) {
+    event.stopPropagation(); // Prevent toggle box from closing
+    if (stepInstructions[container] > 0) {
+        stepInstructions[container] -= 1;
+        document.getElementById(`instruction-text-${container}`).innerHTML = instructions[container][stepInstructions[container]];
+    }
+}
+
+
+function appearDisappearText(id, button) {
+  const hiddenText = document.getElementById(id);
+  // const button = document.querySelector('.btn');
+  if (hiddenText.style.display == 'none') {
+      hiddenText.style.display = 'block';
+      button.textContent = 'Hide Text'; // Update button text
+    } else {
+      hiddenText.style.display = 'none';
+      button.textContent = id === 'hint1' ? 'Hint 1 ✨' : 'Hint 2 ✨';
+    }
+  }
+
+
+
 
     // Caesar Cipher function
     // function caesarCipher(str, shift) {

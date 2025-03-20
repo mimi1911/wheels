@@ -57,7 +57,7 @@
 
         <div class="toggle-instructions" onclick="toggleInstructions('container1')">
             <div class="instruction-title" style="font-size: 30px; font-family: Verdana, Geneva, Tahoma, sans-serif; margin-left: 20px;">⭐ Mission 1: Encode your message!<br></div>
-                <div style="font-size: 15px; font-family: Verdana, Geneva, Tahoma, sans-serif; margin: 40px;" >Click here for instructions on turning your messages into secret coded messages <span id="arrow-container1">▾</span></div>
+                <div style="font-size: 15px; font-family: Verdana, Geneva, Tahoma, sans-serif; margin: 40px;" >Click here twice for instructions on turning your messages into secret coded messages <span id="arrow-container1">▾</span></div>
             <div class="instruction-content" id="instructions-container1">
                 <p id="instruction-text-container1"></p>
                 <div class="nav-buttons">
@@ -69,7 +69,7 @@
 
         <div id="container1" class="container" style = "position: relative">
             <div class="wheel-wrapper" style = "position: relative; height: 900px"></div>
-                <textarea id="inputText1" style = "position: absolute; bottom: 80px; left: 0px"  placeholder="Enter text to encrypt..." right="0px" oninput="setTimeout(() =>(encryptAffText(container1, keyInput1, scaleFactor1, inputText1, outputText1),1500)); highlightInput(container1,inputText1)" ></textarea>
+                <textarea id="inputText1" style = "position: absolute; bottom: 80px; left: 0px"  placeholder="Enter text to encrypt..." right="0px" oninput="setTimeout(() => encryptAffText(container1, keyInput1, scaleFactor1, inputText1, outputText1),2000); highlightInput(container1,inputText1)" ></textarea>
                 <textarea id="outputText1"  style = "position: absolute; bottom: 80px; right: 0px" placeholder="Encrypted text will appear here..." readonly ></textarea>
                 <div id="encryptionColour" style="margin-top: 20px;"></div> <!-- For highlighted characters -->
                 <!-- <textarea id="inputText2" class="fixed-input-copy" placeholder="Enter text that you want to try to encrypt..."  oninput="encryptText()"></textarea><br>
@@ -94,7 +94,7 @@
 
             <div class="toggle-instructions" onclick="toggleInstructions('container1_1')">
                 <div class="instruction-title" style="font-size: 30px; font-family: Verdana, Geneva, Tahoma, sans-serif; margin-left: 20px;">⭐ Mission 2: Decode your message!<br></div>
-                    <div style="font-size: 15px; font-family: Verdana, Geneva, Tahoma, sans-serif; margin: 40px;" >Click here for instructions on decoding your encoded messages into your original message <span id="arrow-container1_1">▾</span></div>
+                    <div style="font-size: 15px; font-family: Verdana, Geneva, Tahoma, sans-serif; margin: 40px;" >Click here twice for instructions on decoding your encoded messages into your original message <span id="arrow-container1_1">▾</span></div>
                     <div class="instruction-content" id="instructions-container1_1">
                 <div class="instruction-content" id="instructions-container1_1">
                     <p id="instruction-text-container1_1"></p>
@@ -107,15 +107,17 @@
             
         <button class="btn" onclick="appearDisappearText('hint1', this)" style="font-size: 15px;">Hint 1 ✨</button>
         <p id="hint1" style="display: none;"> Use mission 1 to encode a message with a certain jump size with a shift of 0.
-            <br> Then find the correct jumping size using this mission.🔥
-            <br> After this try to find the correct shift 😉✨
+            <br> Then find the correct decoding jumping size using this mission (the shift here will be 0 too!).🔥
+            <br> After this, try adding the shift and find the correct decoding shift 😉✨
         </p>
         <button class="btn" onclick="appearDisappearText('hint2', this)" style="font-size: 15px; bottom: 150px;">Hint 2 ✨</button>
         <p id="hint2" style="display: none;"> Here is an example of a decoding that works! 😎
             <br>Try to find why these work!🔥
-            <br> e.g. jumping size = 3, shift = 5. (3x + 5 mod 26)
+            <br> e.g. Encoding jumping size = 3, encoding shift = 5. (3x + 5 mod 26)
             <br> Decoding jumping size: <strong>9</strong> (3x9 = 27 &#8801 1 mod 26)
-            <br> Decoding shift: <strong>7</strong> (9x(-5) &#8801 7 mod 26 )
+            <br> Decoding shift: <strong>7</strong> (9x(<strong>-5</strong>) &#8801 7 mod 26 )
+            <br>
+            <br>Careful it's <strong>minus</strong> the encoding shift because it's decryption!😲✨
         </p>
 
         <div id="container1_1" class="container" style = "position: relative">
@@ -123,7 +125,7 @@
                 <!-- <textarea id="inputText" placeholder="Enter text to encrypt..." right="0px" oninput="setTimeout(encryptText,1500)"></textarea>
                 <textarea style="position: absolute; right: 0px" id="outputText" placeholder="Encrypted text will appear here..." readonly ></textarea> -->
                 <div id="encryptionColour" style="margin-top: 10px;"></div> <!-- For highlighted characters -->
-                <textarea id="inputText1_1" style = "position: absolute; top: 80px; left: 0px" class="fixed-input-copy" placeholder="Enter text that you want to try to decrypt..."  oninput="setTimeout(() =>(encryptAffText(container1_1, keyInput1_1, scaleFactor1_1, inputText1_1, userOutputText1_1),1500)); highlightInput(container1_1, inputText1_1)"></textarea><br> <!--oninput="encryptText(container2, key2, inputText2, userOutputText2)"-->
+                <textarea id="inputText1_1" style = "position: absolute; top: 80px; left: 0px" class="fixed-input-copy" placeholder="Enter text that you want to try to decrypt..."  oninput="setTimeout(() => encryptAffText(container1_1, keyInput1_1, scaleFactor1_1, inputText1_1, userOutputText1_1),1500); highlightInput(container1_1, inputText1_1)"></textarea><br> <!--oninput="encryptText(container2, key2, inputText2, userOutputText2)"-->
                 <textarea id="userOutputText1_1" style="position: absolute; top: 80px; right: 0px" class="userEncryptText" placeholder="Decrypted text will appear here..." readonly ></textarea>
                 <!-- <button style="position: absolute; right: 10px; bottom: 235px;" type="submit">Submit</button> -->
                 <div id="comparisonResult"></div>
@@ -153,7 +155,7 @@
             <p style="margin-top: 0px; margin-left: 55px;">Type what you think it will be in the right textbox!</p>
             </p> -->
 
-        <div class="toggle-instructions" onclick="toggleInstructions('container2')">
+        <!-- <div class="toggle-instructions" onclick="toggleInstructions('container2')">
             <div class="instruction-title" style="font-size: 30px; font-family: Verdana, Geneva, Tahoma, sans-serif; margin-left: 20px;">⭐ Mission 3: Try encoding the message by yourself!<br></div>
                 <div style="font-size: 15px; font-family: Verdana, Geneva, Tahoma, sans-serif; margin: 40px;" >Click here for instructions on encoding your message from your original message <span id="arrow-container2">▾</span></div>
                 <div class="instruction-content" id="instructions-container2">
@@ -164,16 +166,16 @@
                     <button class="nav-btn" onclick="nextStep(event, 'container2')">Next ➡️</button>
                 </div>
             </div>
-        </div>
+        </div> -->
         
         <div id="container2" class="container" style = "position: relative">
-            <div class="wheel-wrapper" style = "position: relative; height: 900px"></div>
+            <div class="wheel-wrapper" style = "position: relative; height: 900px"></div> 
                 <!-- <textarea id="inputText" placeholder="Enter text to encrypt..." right="0px" oninput="setTimeout(encryptText,1500)"></textarea>
                 <textarea style="position: absolute; right: 0px" id="outputText" placeholder="Encrypted text will appear here..." readonly ></textarea> -->
-                <div id="encryptionColour" style="margin-top: 10px;"></div> <!-- For highlighted characters -->
-                <textarea id="inputText2" style = "position: absolute; bottom: 80px; left: 0px" class="fixed-input-copy" placeholder="Enter text that you want to try to encrypt..."  oninput="encryptText(); highlightInput(container2, inputText2)"></textarea><br> <!--oninput="encryptText(container2, key2, inputText2, userOutputText2)"-->
-                <textarea id="userOutputText2" style="position: absolute; bottom: 80px; right: 0px" class="userEncryptText" placeholder="Try to encrypt the text here..." oninput="checkEncipher(container2, key2, inputText2, userOutputText2)" ></textarea>
-                <!-- <button style="position: absolute; right: 10px; bottom: 235px;" type="submit">Submit</button> -->
+                 <div id="encryptionColour" style="margin-top: 10px;"></div> <!--For highlighted characters -->
+                 <textarea id="inputText2" style = "position: absolute; bottom: 80px; left: 0px" class="fixed-input-copy" placeholder="Enter text that you want to try to encrypt..."  oninput=" highlightInput(container2, inputText2)"></textarea><br> <!--oninput="encryptAffText(container2, key2, sf2, inputText2, userOutputText2)" -->
+                <textarea id="userOutputText2" style="position: absolute; bottom: 80px; right: 0px" class="userEncryptText" placeholder="Try to encrypt the text here..." oninput="checkAffEncipher(container2, key2, sf2, inputText2, userOutputText2)" ></textarea> 
+                <button style="position: absolute; right: 10px; bottom: 235px;" type="submit">Submit</button>
                 <p style="position: absolute; right: 80px; bottom: 300px" id="message" text-align="center"> </p>
                 <div id="comparisonResult"></div>
                 <!-- Outer Wheel -->
@@ -193,18 +195,17 @@
             </div>
 
 
-            <div id="container3" class="container" style = "position: relative">
+             <div id="container3" class="container" style = "position: relative">
                 <div class="wheel-wrapper" style = "position: relative; height: 900px"></div>
-                    <!-- <textarea id="inputText" placeholder="Enter text to encrypt..." right="0px" oninput="setTimeout(encryptText,1500)"></textarea>
-                    <textarea style="position: absolute; right: 0px" id="outputText" placeholder="Encrypted text will appear here..." readonly ></textarea> -->
-                    <div id="encryptionColour" style="margin-top: 10px;"></div> <!-- For highlighted characters -->
+                    
+                    <div id="encryptionColour" style="margin-top: 10px;"></div> <!--For highlighted characters -->
                     <textarea id="inputText3" style = "position: absolute; bottom: 80px; left: 0px" class="fixed-input-copy" placeholder="Enter text that you want to try to encrypt..."  oninput="caesarNumCipherRed('inputText3', 'key3', 26, 'userOutputText3', 'workingOut3'); highlightInput(container3, inputText3)"></textarea><br> <!--oninput="encryptText(container2, key2, inputText2, userOutputText2)"-->
                     <p id="workingOut3" style="right: 80px; bottom: 300px; color: blue" text-align="center"></p>
                     <textarea id="userOutputText3" style="position: absolute; bottom: 80px; right: 0px" class="userEncryptText" placeholder="Try to encrypt the text here..." oninput="checkEncipher(container3, key3, inputText3, userOutputText3)" ></textarea>
-                    <!-- <button style="position: absolute; right: 10px; bottom: 235px;" type="submit">Submit</button> -->
+                   
                     <p style="position: absolute; right: 80px; bottom: 300px" id="message" text-align="center"> </p>
                     <div id="comparisonResult"></div>
-                    <!-- Outer Wheel -->
+                    
                     <div class="outer-wheel" id="outerWheel" ></div>
                     <div class="hide-wheel" ></div>
                     <div onmousemove="m(event)" class="inner-wheel">
@@ -219,16 +220,14 @@
 
                 <div id="container4" class="container" style = "position: relative">
                     <div class="wheel-wrapper" style = "position: relative; height: 900px"></div>
-                        <!-- <textarea id="inputText" placeholder="Enter text to encrypt..." right="0px" oninput="setTimeout(encryptText,1500)"></textarea>
-                        <textarea style="position: absolute; right: 0px" id="outputText" placeholder="Encrypted text will appear here..." readonly ></textarea> -->
-                        <div id="encryptionColour" style="margin-top: 10px;"></div> <!-- For highlighted characters -->
+                        <div id="encryptionColour" style="margin-top: 10px;"></div> <!--For highlighted characters -->
                         <textarea id="inputText4" style = "position: absolute; bottom: 80px; left: 0px" class="fixed-input-copy" placeholder="Enter text that you want to try to encrypt..."  oninput="caesarNumCipherMod('inputText4', 'key4', sliderMod, 'userOutputText4', 'workingOut4');"></textarea><br> <!--oninput="encryptText(container2, key2, inputText2, userOutputText2)"-->
                         <p id="workingOut4" style="right: 80px; bottom: 0px; color: blue" text-align="center"></p>
                         <textarea id="userOutputText4" style="position: absolute; bottom: 80px; right: 0px" class="userEncryptText" placeholder="Try to encrypt the text here..." oninput="checkEncipher(container4, key4, inputText4, userOutputText4)" ></textarea>
-                        <!-- <button style="position: absolute; right: 10px; bottom: 235px;" type="submit">Submit</button> -->
+                       
                         <p style="position: absolute; right: 80px; bottom: 300px" id="message" text-align="center"> </p>
                         <div id="comparisonResult"></div>
-                        <!-- Outer Wheel -->
+                        
                         <div class="outer-wheel" id="outerWheel"></div>
                         <div class="hide-wheel"></div>
                         <div onmousemove="m(event)" class="inner-wheel">
@@ -244,8 +243,7 @@
                             <p style="position: relative; left: -30px; bottom: 0px;">Number of Segments: <span id="segmentValue"> 26</span></p>
                         </div>
                     </div>
-           
-
+    
     
 
     </main>
@@ -262,9 +260,9 @@
         affineWheel(container1, charSet, numSegments, 162, sf1, outputText1);
         affineWheel(container1_1, charSet, numSegments, 162, sf1_1, userOutputText1_1);
         affineWheel(container2, charSet, numSegments, 162, sf2, userOutputText2);
-        caesarWheel(container2, charSet, numSegments, 162);
-        caesarWheel(container3, charSet, numSegments, 162);
-        caesarWheel(container4, charSet, numSegments, 162);
+        // caesarWheel(container2, charSet, numSegments, 162);
+        // caesarWheel(container3, charSet, numSegments, 162);
+        // caesarWheel(container4, charSet, numSegments, 162);
         
 
 

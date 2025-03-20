@@ -1200,23 +1200,25 @@ let stepInstructions = { "container1": 0, "container1_1": 0, "container2": 0, "c
 let instructions = {
   "container1": [
       `<span style="font-size: 20px; background-color: rgb(173, 217, 250); padding: 2px 5px; border-radius: 5px; display: block;">
-      <strong>Step 1.</strong> Type in the <strong>jumping factor ✨</strong> you want (e.g. 2)</span> <br><br>
+      <strong>Step 1.</strong> Type in the <strong>jumping size ✨</strong> you want (e.g. 2)</span> <br><br>
       You want to encode your message so it is a problem if it crashes and doesn't give you all the 
       alphabet sets that you want 😲  
-      <br><br> <strong>What numbers work?😲  Why do you think it works?😲 </strong>
+      <br> This is the <strong>a</strong> in <strong>ax + b mod 26</strong>!
+      <br><br> <strong>What numbers work?😲  Why do you think it works?😲 </strong>`,
+      `<span style="font-size: 20px; background-color: rgb(173, 217, 250); padding: 2px 5px; border-radius: 5px; display: block;">
       <strong>Step 2.</strong> Type in the <strong>key</strong> you want (e.g. 5)</span> <br><br>
       This part is exactly the same as what you did in the caesar cipher 😉✨<br>`,
       `<span style="font-size: 20px; background-color: rgb(173, 217, 250); padding: 2px 5px; border-radius: 5px; display: block;">
-      <strong>Step 3.</strong> Type in the <strong>plaintext message</strong> you want to encipher in the left textbox <br>
+      <strong>Step 3.</strong> Type in the <strong>plaintext message</strong> you want to encipher in the left textbox ✨✨<br>
       (e.g. "My name is __") </span> <br><br>
-       <strong>Tip: </strong> Type slowly too see the letter from the plaintext highlight in red with the 
+       <strong>Tip: </strong> Type slowly too see the letter from the plaintext highlight in blue with the 
        corresponding ciphertext highlight in yellow! 😎<br>`,
       `<span style="font-size: 20px; background-color: rgb(173, 217, 250); padding: 2px 5px; border-radius: 5px; display: block;">
-      <strong>Step 4. The enciphered message</strong> will appear in the right textbox </span> <br><br> 
+      <strong>Step 4. The enciphered message</strong> will appear in the right textbox 😲</span> <br><br> 
       Check if you get the same encoding by finding the letter you want to encipher on 
       the grey inner-wheel, which represents the original alphabet set (or the <strong>plaintext</strong>), then replacing it 
-      with the corresponding letter on the light blue outer-wheel, which represents the 4
-      shifted alphabet set (or the <strong>ciphertext</strong>).`,
+      with the corresponding letter on the light blue outer-wheel, which represents the
+      shifted alphabet set (or the <strong>ciphertext</strong> 😎✨).`,
       `<span style="font-size: 20px; background-color: rgb(173, 217, 250); padding: 2px 5px; border-radius: 5px; display: block;">
       <strong>Step 5:</strong> Repeat this until you get the enciphered text yourself! </span> <br><br>
       <strong>Mission 1 Complete! 🏅</strong> <br>You can now encode your message using the simple affine cipher wheel.
@@ -1234,7 +1236,7 @@ let instructions = {
     If not that's okay!😉✨ Go check out the hints if you want to satisfy your curious minds🔥
     <br><br> You must have noticed it's not very easy to get back your original message than in the ceasar cipher exercise.
     <br> This just proves simple affine cipher is <strong>much safer</strong> and <strong>more protected</strong>!!😲🔥  
-    <strong>Mission 2 Complete! 🏅 </strong><br>
+    <br><br> <strong>Mission 2 Complete! 🏅 </strong><br>
     If you managed to get your jumping size or key, did you notice something special about the number?
     <br><br> New emoji unlocked: 🤖`,
   ],
@@ -1325,7 +1327,7 @@ function appearDisappearText(id, button) {
 
   
 
-    function affineCipher(str, sf, shift, outputText){
+    function affineCipher(str, sf, shift){
         // if (!isWheelFilled) {
         //   // outputText.value = "Processing...";
         //   return "Processing...";
@@ -1351,9 +1353,18 @@ function appearDisappearText(id, button) {
       const input = inputText.value;
       const shift = parseInt(keyInput.value)%numSegments ||0;
       const sf = parseInt(scaleFactor.value);   
-      const translatedText = affineCipher(input, sf, shift, outputText);
+      const translatedText = affineCipher(input, sf, shift);
     
       outputText.value = translatedText;
+      // return translatedText;
+  }
+
+  function encryptAffTextReturn(container, keyInput, scaleFactor, inputText) {
+    const input = inputText.value;
+    const shift = parseInt(keyInput.value)%numSegments ||0;
+    const sf = parseInt(scaleFactor.value);   
+
+    return affineCipher(input, sf, shift);
   }
 
 // caesarWheel(container1);
@@ -1406,14 +1417,14 @@ if (charSetInElements[inCharIndex]){
 
 container1.addEventListener('keydown', function(event) {
     const inputLetter = event.key; // Normalize input to uppercase
-    highlightInput(container1, inputLetter);  // Highlight only in container1
-    highlightOutwheel(container1, inputLetter, keyInput1);
+    setTimeout(() => highlightInput(container1, inputLetter),500);  // Highlight only in container1
+    setTimeout(() => highlightOutwheel(container1, inputLetter, keyInput1, scaleFactor1),1000);
 });
 
 container1_1.addEventListener('keydown', function(event) {
     const inputLetter = event.key; // Normalize input to uppercase
-    highlightInput(container1_1, inputLetter);  // Highlight only in container1_1
-    highlightOutwheel(container1_1, inputLetter, keyInput1_1);
+    setTimeout(() => highlightInput(container1_1, inputLetter),500);  // Highlight only in container1_1
+    setTimeout(() => highlightOutwheel(container1_1, inputLetter, keyInput1_1, scaleFactor1_1),1000);
 });
 
 container2.addEventListener('keydown', function(event) {
@@ -1425,6 +1436,80 @@ container2.addEventListener('keydown', function(event) {
 document.addEventListener('keydown', delayHighlightOutwheel);
     
 
+function highlightInput(container, inputLetter){
+  // Gets all the char elements of the Inner Wheel 
+  const innerWheel = container.querySelector('.inner-wheel');
+  const charSetInElements = innerWheel.getElementsByClassName('char');
+  const outerWheel = container.querySelector('.outer-wheel');
+  const charSetOutElements = outerWheel.getElementsByClassName('char');
+  /* const charSetOutElements = outerWheel.getElementsByClassName('char')
+  const shift = parseInt(document.getElementById('key').value)%numSegments ||0;
+  const translatedChar = caesarCipher(input, shift); */
+
+  setTimeout(() => removeInHighlight(charSetInElements, charSetOutElements),3000);
+
+    if (inputLetter.match(/^[A-Za-z]$/)){
+        // Converts input character to ASCII code
+        const inCode = inputLetter.charCodeAt(0);
+        // ASCII base
+        const inBase = inputLetter === inputLetter.toLowerCase() ? 97 : 65;
+        // Calculate index (0-25)
+        const inCharIndex = inCode - inBase;
+
+        // Highlights Inner Wheel of the corresponding plaintext
+        if (charSetInElements[inCharIndex]){
+        //setTimeout(() => removeHighlight(charSetElements),1000);
+        charSetInElements[inCharIndex].style.color = "blue";
+        charSetInElements[inCharIndex].style.fontWeight = "bold";
+        // charSetInElements[inCharIndex].classList.add('innerHighlight');
+        }
+    }
+}
+
+
+// Function to highlight the Outer Wheel characters on keydown event from the user 
+function highlightOutwheel(container, inputLetter, keyInput, scaleFactor){
+  // Gets all the char elements of the Outer Wheel
+  const outerWheel = container.querySelector('.outer-wheel');
+  const charSetOutElements = outerWheel.getElementsByClassName('char')
+  const shift = parseInt(keyInput.value)%numSegments ||0;
+  const sf = parseInt(scaleFactor.value);
+  const translatedChar = affineCipher(inputLetter, sf, shift);
+
+  if (translatedChar.match(/^[A-Za-z]$/)){
+    // Converts input character to ASCII code
+    const outCode = translatedChar.charCodeAt(0);
+    // ASCII base
+    const outBase = translatedChar === translatedChar.toLowerCase() ? 97 : 65;
+    // Calculate index (0-25)
+    const outCharIndex = outCode - outBase;
+
+    if (charSetOutElements[outCharIndex]){
+      charSetOutElements[outCharIndex].style.color = "yellow";
+      charSetOutElements[outCharIndex].style.fontWeight = "bold";
+    }
+  }
+}
+
+// // Show highlight of the Outer Wheel with 1 sec delay
+// function delayHighlightOutwheel(event, container, inputLetter, keyInput){
+//   setTimeout(() => highlightInput(container, inputLetter), 1000);
+//   setTimeout(() => highlightOutwheel(container, inputLetter, keyInput), 2000);
+// }
+
+// Remove both highlights at the same time
+function removeInHighlight(charSetInElements, charSetOutElements){
+  for (let char of charSetInElements) {
+      char.style.color = "";
+      char.style.fontWeight = "";
+        // char.classList.remove('innerHighlight'); 
+        }
+  for (let char of charSetOutElements){
+    char.style.color = "";
+    char.style.fontWeight = "";
+    // char.classList.remove('outerHighlight');
+  }
+      }          
     //COPY the function highlights inner and outer at the same time and makes it disappear at the same time with enciphered coming at 1sec delay.
      // function to highlight the characters on keydown event from the user
     //keydownevent is just a placeholder
@@ -1466,87 +1551,92 @@ document.addEventListener('keydown', delayHighlightOutwheel);
 
 
     // Function to highlight the Inner Wheel characters on keydown event from the user 
-    function highlightInput(container, inputLetter){
-      // Gets all the char elements of the Inner Wheel 
-      const innerWheel = container.querySelector('.inner-wheel');
-      const charSetInElements = innerWheel.getElementsByClassName('char');
-      const outerWheel = container.querySelector('.outer-wheel');
-      const charSetOutElements = outerWheel.getElementsByClassName('char');
-      /* const charSetOutElements = outerWheel.getElementsByClassName('char')
-      const shift = parseInt(document.getElementById('key').value)%numSegments ||0;
-      const translatedChar = caesarCipher(input, shift); */
+    // function highlightInput(container, inputLetter){
+    //   // Gets all the char elements of the Inner Wheel 
+    //   const innerWheel = container.querySelector('.inner-wheel');
+    //   const charSetInElements = innerWheel.getElementsByClassName('char');
+    //   const outerWheel = container.querySelector('.outer-wheel');
+    //   const charSetOutElements = outerWheel.getElementsByClassName('char');
+    //   /* const charSetOutElements = outerWheel.getElementsByClassName('char')
+    //   const shift = parseInt(document.getElementById('key').value)%numSegments ||0;
+    //   const translatedChar = caesarCipher(input, shift); */
 
-      setTimeout(() => removeInHighlight(charSetInElements, charSetOutElements),2000);
+    //   setTimeout(() => removeInHighlight(charSetInElements, charSetOutElements),2000);
 
-        if (inputLetter.match(/^[A-Za-z]$/)){
-            // Converts input character to ASCII code
-            const inCode = inputLetter.charCodeAt(0);
-            // ASCII base
-            const inBase = inputLetter === inputLetter.toLowerCase() ? 97 : 65;
-            // Calculate index (0-25)
-            const inCharIndex = inCode - inBase;
+    //     if (inputLetter.match(/^[A-Za-z]$/)){
+    //         // Converts input character to ASCII code
+    //         const inCode = inputLetter.charCodeAt(0);
+    //         // ASCII base
+    //         const inBase = inputLetter === inputLetter.toLowerCase() ? 97 : 65;
+    //         // Calculate index (0-25)
+    //         const inCharIndex = inCode - inBase;
 
-            // Highlights Inner Wheel of the corresponding plaintext
-            if (charSetInElements[inCharIndex]){
-            //setTimeout(() => removeHighlight(charSetElements),1000);
-            charSetInElements[inCharIndex].classList.add('innerHighlight');
-            }
-        }
-    }
+    //         // Highlights Inner Wheel of the corresponding plaintext
+    //         if (charSetInElements[inCharIndex]){
+    //         //setTimeout(() => removeHighlight(charSetElements),1000);
+    //         charSetInElements[inCharIndex].classList.add('innerHighlight');
+    //         }
+    //     }
+    // }
     
     
-    // Function to highlight the Outer Wheel characters on keydown event from the user 
-    function highlightOutwheel(container, inputLetter, keyInput){
-      // Gets all the char elements of the Outer Wheel
-      const outerWheel = container.querySelector('.outer-wheel');
-      const charSetOutElements = outerWheel.getElementsByClassName('char')
-      const shift = parseInt(keyInput.value)%numSegments ||0;
-      const translatedChar = caesarCipher(inputLetter, shift);
+    // // Function to highlight the Outer Wheel characters on keydown event from the user 
+    // function highlightOutwheel(container, inputLetter, keyInput){
+    //   // Gets all the char elements of the Outer Wheel
+    //   const outerWheel = container.querySelector('.outer-wheel');
+    //   const charSetOutElements = outerWheel.getElementsByClassName('char')
+    //   const shift = parseInt(keyInput.value)%numSegments ||0;
+    //   const translatedChar = caesarCipher(inputLetter, shift);
 
-      if (translatedChar.match(/^[A-Za-z]$/)){
-        // Converts input character to ASCII code
-        const outCode = translatedChar.charCodeAt(0);
-        // ASCII base
-        const outBase = translatedChar === translatedChar.toLowerCase() ? 97 : 65;
-        // Calculate index (0-25)
-        const outCharIndex = outCode - outBase;
+    //   if (translatedChar.match(/^[A-Za-z]$/)){
+    //     // Converts input character to ASCII code
+    //     const outCode = translatedChar.charCodeAt(0);
+    //     // ASCII base
+    //     const outBase = translatedChar === translatedChar.toLowerCase() ? 97 : 65;
+    //     // Calculate index (0-25)
+    //     const outCharIndex = outCode - outBase;
 
-        if (charSetOutElements[outCharIndex]){
-          charSetOutElements[outCharIndex].classList.add('outerHighlight');
-        }
-      }
+    //     if (charSetOutElements[outCharIndex]){
+    //       charSetOutElements[outCharIndex].classList.add('outerHighlight');
+    //     }
+    //   }
 
-    }
+    // }
 
-    // Show highlight of the Outer Wheel with 1 sec delay
-    function delayHighlightOutwheel(event){
-      setTimeout(() => highlightOutwheel(event), 1000);
-    }
+    // // Show highlight of the Outer Wheel with 1 sec delay
+    // function delayHighlightOutwheel(event){
+    //   setTimeout(() => highlightOutwheel(event), 1000);
+    // }
 
-    // Remove both highlights at the same time
-    function removeInHighlight(charSetInElements, charSetOutElements){
-      for (let char of charSetInElements) {
-            char.classList.remove('innerHighlight'); 
-            }
-      for (let char of charSetOutElements){
-        char.classList.remove('outerHighlight');
-      }
-          }          
+    // // Remove both highlights at the same time
+    // function removeInHighlight(charSetInElements, charSetOutElements){
+    //   for (let char of charSetInElements) {
+    //         char.classList.remove('innerHighlight'); 
+    //         }
+    //   for (let char of charSetOutElements){
+    //     char.classList.remove('outerHighlight');
+    //   }
+    //       }          
 
           
     // Checks if user Enciphered guess is correct or incorrect
-    function checkEncipher(container, keyInput, inputText, outputText){
+    function checkAffEncipher(container, keyInput, sf, inputText, outputText){
     const messageElement = document.getElementById('message');  
     const userOgInput = inputText.value;
     const userEnInput = outputText.value;
     const shift = parseInt(keyInput.value)%numSegments ||0;
-    const correctEnc = affineCipher(userOgInput, sf, shift, outputText);
+    const sfValue =  parseInt(sf.value);
+    const correctEnc = encryptAffTextReturn(container, shift, sfValue, inputText);
+    // const correctEnc = affineCipher(userOgInput, parseInt(sf).value, shift, outputText);
+    // affineCipher(userOgInput, parseInt(sf).value, shift, outputText);
 
 
     /* Check if the user's input matches the correct cipher */
     // Checks for empty inputs
     if (!userOgInput || !userEnInput) {
-    messageElement.textContent = '';}
+    messageElement.textContent = '';
+    return;
+    }
     // The message only appears when the user Enciphered Input length matches the length of the plaintext   
     else if (userEnInput.length >= correctEnc.length) {
         if (userEnInput === correctEnc) {
@@ -1556,6 +1646,7 @@ document.addEventListener('keydown', delayHighlightOutwheel);
         else {
                 messageElement.innerHTML = "Incorrect Encipher Text. <br>Please try again.";
                 messageElement.style.color = "red"; 
+                messageElement.style.fontWeight = "bold";
             }
     }
     // Clears the message when user Enciphered Input is shorter than the plaintext

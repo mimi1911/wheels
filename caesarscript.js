@@ -118,12 +118,15 @@ const skewAngle = 162;
     outerWheel1.style.transform = `translate(-50%, -50%) rotate(0deg)` 
     innerWheel1.style.transform =  `translate(-50%, -50%) rotate(${key * (360 / numSegments)}deg)` 
     centerWheel1.style.transform = `translate(-50%, -50%) rotate(0deg) rotate(${key * - (360 / numSegments)}deg)`
-    counter = key
-    delayTimer();
+    counter = key;
+    // delayTimer();
     //setTimeout(outerHighlight,500);
-    encryptText(container1, key1, inputText1, outputText1);
+    setTimeout(delayHighlightOutwheel(container1, inputText1, key1),1500);
+    encryptText(container1, keyInput1, inputText1, outputText1);
     checkEncipher(event);
   })
+
+
 
   keyInput1_1.addEventListener('input', function(input){
     let key = input.target.value
@@ -137,10 +140,10 @@ const skewAngle = 162;
     innerWheel1_1.style.transform =  `translate(-50%, -50%) rotate(${key * (360 / numSegments)}deg)` 
     centerWheel1_1.style.transform = `translate(-50%, -50%) rotate(0deg) rotate(${key * - (360 / numSegments)}deg)`
     counter = key
-    delayTimer();
+    // delayTimer();
     //setTimeout(outerHighlight,500);
-    encryptText(container1_1, key1_1, inputText1_1, userOutputText1_1);
-    checkEncipher(container1_1, key1_1, inputText1_1, userOutputText1_1);
+    encryptText(container1_1, keyInput1_1, inputText1_1, userOutputText1_1);
+    // checkEncipher(container1_1, key1_1, inputText1_1, userOutputText1_1);
   })
 
   keyInput2.addEventListener('input', function(input){
@@ -155,10 +158,10 @@ const skewAngle = 162;
     innerWheel2.style.transform =  `translate(-50%, -50%) rotate(${key * (360 / numSegments)}deg)` 
     centerWheel2.style.transform = `translate(-50%, -50%) rotate(0deg) rotate(${key * - (360 / numSegments)}deg)`
     counter = key
-    delayTimer();
+    // delayTimer();
     //setTimeout(outerHighlight,500);
-    encryptText(container2, key2, inputText2, userOutputText2);
-    checkEncipher(container2, key2, inputText2, userOutputText2);
+    // encryptText(container2, keyInput2, inputText2, userOutputText2);
+    checkEncipher(container2, keyInput2, inputText2, userOutputText2);
   })
 
   keyInput3.addEventListener('input', function(input){
@@ -173,10 +176,11 @@ const skewAngle = 162;
     innerWheel3.style.transform =  `translate(-50%, -50%) rotate(${key * (360 / numSegments)}deg)` 
     centerWheel3.style.transform = `translate(-50%, -50%) rotate(0deg) rotate(${key * - (360 / numSegments)}deg)`
     counter = key
-    delayTimer();
+    // delayTimer();
     //setTimeout(outerHighlight,500);
-    encryptText(container3, key3, inputText3, userOutputText3);
-    checkEncipher(container3, key3, inputText3, userOutputText3);
+    caesarNumCipherRed('inputText3', 'key3', 26, 'userOutputText3', 'workingOut3');
+    // encryptText(container3, keyInput3, inputText3, userOutputText3);
+    // checkEncipher(container3, keyInput3, inputText3, userOutputText3);
   })
 
   keyInput4.addEventListener('input', function(input){
@@ -192,10 +196,11 @@ const skewAngle = 162;
     innerWheel4.style.transform =  `translate(-50%, -50%) rotate(${key * (360 / newSegments)}deg)` 
     centerWheel4.style.transform = `translate(-50%, -50%) rotate(0deg) rotate(${key * - (360 / newSegments)}deg)`
     counter = key
-    delayTimer();
-    //setTimeout(outerHighlight,500);
-    encryptText(container4, key4, inputText4, userOutputText4);
-    checkEncipher(container4, key4, inputText4, userOutputText4);
+    // delayTimer();
+    // //setTimeout(outerHighlight,500);
+    // encryptText(container4, key4, inputText4, userOutputText4);
+    // checkEncipher(container4, key4, inputText4, userOutputText4);
+    caesarNumCipherMod('inputText4', 'key4', sliderMod, 'userOutputText4', 'workingOut4')
   })
 
   function appearDisappearText() {
@@ -388,13 +393,13 @@ let instructions = {
       `<span style="font-size: 20px; background-color: rgb(173, 217, 250); padding: 2px 5px; border-radius: 5px; display: block;">
       <strong>Step 2.</strong> Type in the <strong>plaintext message</strong> you want to encipher in the left textbox <br>
       (e.g. "My name is __") </span> <br><br>
-       <strong>Tip: </strong> Type slowly too see the letter from the plaintext highlight in red with the 
+       <strong>Tip: </strong> Type slowly too see the letter from the plaintext highlight in blue with the 
        corresponding ciphertext highlight in yellow! <br>`,
       `<span style="font-size: 20px; background-color: rgb(173, 217, 250); padding: 2px 5px; border-radius: 5px; display: block;">
       <strong>Step 3. The enciphered message</strong> will appear in the right textbox </span> <br><br> 
       Check if you get the same encoding by finding the letter you want to encipher on 
       the grey inner-wheel, which represents the original alphabet set (or the <strong>plaintext</strong>), then replacing it 
-      with the corresponding letter on the light blue outer-wheel, which represents the 4
+      with the corresponding letter on the light blue outer-wheel, which represents the
       shifted alphabet set (or the <strong>ciphertext</strong>).`,
       `<span style="font-size: 20px; background-color: rgb(173, 217, 250); padding: 2px 5px; border-radius: 5px; display: block;">
       <strong>Step 4:</strong> Repeat this until you get the enciphered text yourself! </span> <br><br>
@@ -412,6 +417,7 @@ let instructions = {
     <strong>Step 3.</strong> Did you get the key?</span> <br><br>
     <strong>Mission 2 Complete! 🏅 </strong><br>
     If you managed to get your key, did you notice something special about the number?
+    <br><strong>Hint:</strong> There are 26 letters in the alphabet!
     <br><br> New emoji unlocked: 😉`,
   ],
   "container2": [
@@ -434,15 +440,15 @@ let instructions = {
   "container3": [
     `<span style="font-size: 20px; background-color: rgb(173, 217, 250); padding: 2px 5px; border-radius: 5px; display: block;">
     <strong>Step 1.</strong> Lets find out how to encrypt numbers </span> <br><br>
-    Type in the key (the key is b in x + b mod m). I'm sure you knew what was coming by now 😉`,
+    Type in the shift (the shift key is <strong>b</strong> in <strong>x + b mod m</strong>). I'm sure you knew what was coming by now 😉`,
     `<span style="font-size: 20px; background-color: rgb(173, 217, 250); padding: 2px 5px; border-radius: 5px; display: block;">
     <strong>Step 2.</strong> You guessed it...! ✨ </span> <br><br>
     Type in the number you want to encrypt.
-    <br> (This is the x in x + b mod m)`,
+    <br> (This is the <strong>x</strong> in <strong>x + b mod m</strong>)`,
     `<span style="font-size: 20px; background-color: rgb(173, 217, 250); padding: 2px 5px; border-radius: 5px; display: block;">
     <strong>Step 3. ✨ Magical Steps for Encryption ✨ </strong> </span> <br><br>
     This is actually called <strong> ✨ working out the modulus ✨</strong> in maths! 😉
-    <br> (This is the m in x + b mod m! mod is short for modulus😉✨)`,
+    <br> (This is the <strong>m</strong> in <strong>x + b mod m</strong>! mod is short for modulus😉✨)`,
     `<span style="font-size: 20px; background-color: rgb(173, 217, 250); padding: 2px 5px; border-radius: 5px; display: block;">
     <strong>Step 4.</strong> Try other numbers!</span> <br><br>
     <strong>Mission 4 Complete! 🏅 </strong> <br>
@@ -454,7 +460,7 @@ let instructions = {
     <strong>Step 1.</strong> Move the segment bar ✨ </span> <br><br>
     You thought first step was always the same? You thought wrong 😎`,
     `<span style="font-size: 20px; background-color: rgb(173, 217, 250); padding: 2px 5px; border-radius: 5px; display: block;">
-    <strong>Step 2.</strong> Type in the key ✨ </span> <br><br>
+    <strong>Step 2.</strong> Type in the shift ✨ </span> <br><br>
     Don't worry, this step was coming 😉`,
     `<span style="font-size: 20px; background-color: rgb(173, 217, 250); padding: 2px 5px; border-radius: 5px; display: block;">
     <strong>Step 3. ✨ Magical Steps for Encryption ✨ </strong> </span> <br><br>
@@ -464,8 +470,6 @@ let instructions = {
     <strong>Step 4.</strong> Try other modulus!</span> <br><br>
     <strong>Mission 5 Complete! 🏅 </strong> <br>
     Well done agents!! ✨✨ 
-    <br> You have now completed the Caesar Cipher stage!! Mastery in caesar cipher is only done by the tough 😎
-    <br> Ready to go to Simple Affine Cipher stage now...? 😉 I know you can do it!! All the best, agents 😎✨
     <br><br> New emoji unlocked: 😲`,
   ],
   "container5": [
@@ -488,7 +492,8 @@ let instructions = {
     <strong>Step 4.</strong> ✨✨Are you ready to move to the next level? ✨✨</span> <br><br>
     <strong>Mission 6 Complete! 🏅 </strong> <br>
     <br> You have now completed the Caesar Cipher stage!!😲 Mastery in caesar cipher is only done by the tough 😎
-    <br> Ready to go to Simple Affine Cipher stage now...? 😉 I know you can do it!! All the best, agents 😎✨`,
+    <br> Ready to go to Simple Affine Cipher stage now...? 😉 
+    <br>I know you can do it!! All the best, agents 😎✨`,
   ],
 };
 
@@ -499,7 +504,8 @@ function toggleInstructions(container) {
   let content = document.getElementById(`instructions-${container}`);
   let arrow = document.getElementById(`arrow-${container}`);
 
-    if (window.getComputedStyle(content).display !== "none") {
+    if (window.getComputedStyle(content).display !== "none"){
+    // if(currentDisplay !== "none") {
         content.style.display = "none";
         arrow.innerHTML = "▾";
     } else {
@@ -512,7 +518,7 @@ function toggleInstructions(container) {
 
 function nextStep(event, container) {
     event.stopPropagation(); // Prevent toggle box from closing
-    if (stepInstructions[container] < instructions[container].length - 1) {
+    if (stepInstructions[container] <= instructions[container].length - 1) {
         stepInstructions[container]++;
         document.getElementById(`instruction-text-${container}`).innerHTML = instructions[container][stepInstructions[container]];
     }
@@ -628,20 +634,27 @@ if (charSetInElements[inCharIndex]){
 
 container1.addEventListener('keydown', function(event) {
     const inputLetter = event.key; // Normalize input to uppercase
-    highlightInput(container1, inputLetter);  // Highlight only in container1
-    highlightOutwheel(container1, inputLetter, keyInput1);
+    setTimeout(() => highlightInput(container1, inputLetter),500); // Highlight only in container1
+    setTimeout(() => highlightOutwheel(container1, inputLetter, keyInput1),1000);
+    // delayHighlightOutwheel(event, container, inputLetter, keyInput);
 });
 
 container1_1.addEventListener('keydown', function(event) {
     const inputLetter = event.key; // Normalize input to uppercase
-    highlightInput(container1_1, inputLetter);  // Highlight only in container1_1
-    highlightOutwheel(container1_1, inputLetter, keyInput1_1);
+    setTimeout(() => highlightInput(container1_1, inputLetter),500);  // Highlight only in container1_1
+    setTimeout(() => highlightOutwheel(container1_1, inputLetter, keyInput1_1),1000);
 });
 
 container2.addEventListener('keydown', function(event) {
     const inputLetter = event.key; // Normalize input to uppercase
-    highlightInput(container2, inputLetter);  // Highlight only in container2
-    highlightOutwheel(container2, inputLetter, keyInput2);
+    // Detect active textarea
+    const activeElement = document.activeElement;
+    if (activeElement === inputText2) {
+      setTimeout(() => highlightInput(container2, inputLetter),500);  // Highlight only in container2
+      setTimeout(() => highlightOutwheel(container2, inputLetter, keyInput2),1000);
+    } else if (activeElement === userOutputText2){
+      removeInHighlight(charSetInElements, charSetOutElements);
+    }
 });
 
 document.addEventListener('keydown', delayHighlightOutwheel);
@@ -698,7 +711,7 @@ document.addEventListener('keydown', delayHighlightOutwheel);
       const shift = parseInt(document.getElementById('key').value)%numSegments ||0;
       const translatedChar = caesarCipher(input, shift); */
 
-      setTimeout(() => removeInHighlight(charSetInElements, charSetOutElements),2000);
+      setTimeout(() => removeInHighlight(charSetInElements, charSetOutElements),3000);
 
         if (inputLetter.match(/^[A-Za-z]$/)){
             // Converts input character to ASCII code
@@ -711,7 +724,9 @@ document.addEventListener('keydown', delayHighlightOutwheel);
             // Highlights Inner Wheel of the corresponding plaintext
             if (charSetInElements[inCharIndex]){
             //setTimeout(() => removeHighlight(charSetElements),1000);
-            charSetInElements[inCharIndex].classList.add('innerHighlight');
+            charSetInElements[inCharIndex].style.color = "blue";
+            charSetInElements[inCharIndex].style.fontWeight = "bold";
+            // charSetInElements[inCharIndex].classList.add('innerHighlight');
             }
         }
     }
@@ -734,24 +749,29 @@ document.addEventListener('keydown', delayHighlightOutwheel);
         const outCharIndex = outCode - outBase;
 
         if (charSetOutElements[outCharIndex]){
-          charSetOutElements[outCharIndex].classList.add('outerHighlight');
+          charSetOutElements[outCharIndex].style.color = "yellow";
+          charSetOutElements[outCharIndex].style.fontWeight = "bold";
         }
       }
-
     }
 
     // Show highlight of the Outer Wheel with 1 sec delay
-    function delayHighlightOutwheel(event){
-      setTimeout(() => highlightOutwheel(event), 1000);
+    function delayHighlightOutwheel(event, container, inputLetter, keyInput){
+      setTimeout(() => highlightInput(container, inputLetter), 1000);
+      setTimeout(() => highlightOutwheel(container, inputLetter, keyInput), 2000);
     }
 
     // Remove both highlights at the same time
     function removeInHighlight(charSetInElements, charSetOutElements){
       for (let char of charSetInElements) {
-            char.classList.remove('innerHighlight'); 
+          char.style.color = "";
+          char.style.fontWeight = "";
+            // char.classList.remove('innerHighlight'); 
             }
       for (let char of charSetOutElements){
-        char.classList.remove('outerHighlight');
+        char.style.color = "";
+        char.style.fontWeight = "";
+        // char.classList.remove('outerHighlight');
       }
           }          
 

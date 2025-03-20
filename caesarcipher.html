@@ -51,7 +51,7 @@
 
         <div class="toggle-instructions" onclick="toggleInstructions('container1')">
             <div class="instruction-title" style="font-size: 30px; font-family: Verdana, Geneva, Tahoma, sans-serif; margin-left: 20px;">⭐ Mission 1: Encode your message!<br></div>
-                <div style="font-size: 15px; font-family: Verdana, Geneva, Tahoma, sans-serif; margin: 40px;" >Click here for instructions on turning your messages into secret coded messages <span id="arrow-container1">▾</span></div>
+                <div style="font-size: 15px; font-family: Verdana, Geneva, Tahoma, sans-serif; margin: 40px;" >Click here twice for instructions on turning your messages into secret coded messages <span id="arrow-container1">▾</span></div>
             <div class="instruction-content" id="instructions-container1">
                 <p id="instruction-text-container1"></p>
                 <div class="nav-buttons">
@@ -81,7 +81,7 @@
         </p>
         <div id="container1" class="container" style = "position: relative">
             <div class="wheel-wrapper" style = "position: relative; height: 900px"></div>
-                <textarea id="inputText1" style = "position: absolute; bottom: 80px; left: 0px"  placeholder="Enter text to encrypt..." right="0px" oninput="setTimeout(encryptText(container1, key1, inputText1, outputText1),1500); highlightInput(container1,inputText1)" ></textarea>
+                <textarea id="inputText1" style = "position: absolute; bottom: 80px; left: 0px"  placeholder="Enter text to encrypt..." right="0px" oninput="setTimeout(() =>encryptText(container1, key1, inputText1, outputText1),1500); highlightInput(container1,inputText1)" ></textarea>
                 <textarea id="outputText1"  style = "position: absolute; bottom: 80px; right: 0px" placeholder="Encrypted text will appear here..." readonly ></textarea>
                 <div id="encryptionColour" style="margin-top: 20px;"></div> <!-- For highlighted characters -->
                 <!-- <textarea id="inputText2" class="fixed-input-copy" placeholder="Enter text that you want to try to encrypt..."  oninput="encryptText()"></textarea><br>
@@ -102,7 +102,7 @@
 
             <div class="toggle-instructions" onclick="toggleInstructions('container1_1')">
                 <div class="instruction-title" style="font-size: 30px; font-family: Verdana, Geneva, Tahoma, sans-serif; margin-left: 20px;">⭐ Mission 2: Decode to get your original message!</div>
-                    <div style="font-size: 15px; font-family: Verdana, Geneva, Tahoma, sans-serif; margin: 40px;" >Click here for instructions on decoding your encoded messages into your original message <span id="arrow-container1_1">▾</span></div>
+                    <div style="font-size: 15px; font-family: Verdana, Geneva, Tahoma, sans-serif; margin: 40px;" >Click here twice for instructions on decoding your encoded messages into your original message <span id="arrow-container1_1">▾</span></div>
                 <div class="instruction-content" id="instructions-container1_1">
                     <p id="instruction-text-container1_1"></p>
                     <div class="nav-buttons">
@@ -117,7 +117,7 @@
                 <!-- <textarea id="inputText" placeholder="Enter text to encrypt..." right="0px" oninput="setTimeout(encryptText,1500)"></textarea>
                 <textarea style="position: absolute; right: 0px" id="outputText" placeholder="Encrypted text will appear here..." readonly ></textarea> -->
                 <div id="encryptionColour" style="margin-top: 10px;"></div> <!-- For highlighted characters -->
-                <textarea id="inputText1_1" style = "position: absolute; top: 80px; left: 0px" class="fixed-input-copy" placeholder="Enter text that you want to try to decrypt..."  oninput="setTimeout(encryptText(container1_1, key1_1, inputText1_1, userOutputText1_1),1500); highlightInput(container1_1, inputText1_1)"></textarea><br> <!--oninput="encryptText(container2, key2, inputText2, userOutputText2)"-->
+                <textarea id="inputText1_1" style = "position: absolute; top: 80px; left: 0px" class="fixed-input-copy" placeholder="Enter text that you want to try to decrypt..."  oninput="setTimeout(() =>encryptText(container1_1, key1_1, inputText1_1, userOutputText1_1),1500); highlightInput(container1_1, inputText1_1)"></textarea><br> <!--oninput="encryptText(container2, key2, inputText2, userOutputText2)"-->
                 <textarea id="userOutputText1_1" style="position: absolute; top: 80px; right: 0px" class="userEncryptText" placeholder="Decrypted text will appear here..." readonly ></textarea>
                 <!-- <button style="position: absolute; right: 10px; bottom: 235px;" type="submit">Submit</button> -->
                 <div id="comparisonResult"></div>
@@ -146,7 +146,7 @@
 
         <div class="toggle-instructions" onclick="toggleInstructions('container2')">
             <div class="instruction-title" style="font-size: 30px; font-family: Verdana, Geneva, Tahoma, sans-serif; margin-left: 20px;">⭐ Mission 3: Try encoding the message by yourself!</div>
-                <div style="font-size: 15px; font-family: Verdana, Geneva, Tahoma, sans-serif; margin: 40px;" >Click here for instructions on encoding your message from your original message <span id="arrow-container2">▾</span></div>
+                <div style="font-size: 15px; font-family: Verdana, Geneva, Tahoma, sans-serif; margin: 40px;" >Click here twice for instructions on encoding your message from your original message <span id="arrow-container2">▾</span></div>
             <div class="instruction-content" id="instructions-container2">
                 <p id="instruction-text-container2"></p>
                 <div class="nav-buttons">
@@ -161,8 +161,8 @@
                 <!-- <textarea id="inputText" placeholder="Enter text to encrypt..." right="0px" oninput="setTimeout(encryptText,1500)"></textarea>
                 <textarea style="position: absolute; right: 0px" id="outputText" placeholder="Encrypted text will appear here..." readonly ></textarea> -->
                 <div id="encryptionColour" style="margin-top: 10px;"></div> <!-- For highlighted characters -->
-                <textarea id="inputText2" style = "position: absolute; bottom: 80px; left: 0px" class="fixed-input-copy" placeholder="Enter text that you want to try to encrypt..."  oninput="encryptText(); highlightInput(container2, inputText2)"></textarea><br> <!--oninput="encryptText(container2, key2, inputText2, userOutputText2)"-->
-                <textarea id="userOutputText2" style="position: absolute; bottom: 80px; right: 0px" class="userEncryptText" placeholder="Try to encrypt the text here..." oninput="checkEncipher(container2, key2, inputText2, userOutputText2)" ></textarea>
+                <textarea id="inputText2" style = "position: absolute; bottom: 80px; left: 0px" class="fixed-input-copy" placeholder="Enter text that you want to try to encrypt..."  oninput="setTimeout(() =>encryptText(),1500); highlightInput(container2, inputText2)"></textarea><br> <!--oninput="encryptText(container2, key2, inputText2, userOutputText2)"-->
+                <textarea id="userOutputText2" style="position: absolute; bottom: 80px; right: 0px" class="userEncryptText" placeholder="Try to encrypt the text here..." oninput="checkEncipher(container2, key2, inputText2, userOutputText2);" ></textarea>
                 <!-- <button style="position: absolute; right: 10px; bottom: 235px;" type="submit">Submit</button> -->
                 <p style="position: absolute; right: 80px; bottom: 300px" id="message" text-align="center"> </p>
                 <div id="comparisonResult"></div>
@@ -180,7 +180,7 @@
 
             <div class="toggle-instructions" onclick="toggleInstructions('container3')">
                 <div class="instruction-title" style="font-size: 30px; font-family: Verdana, Geneva, Tahoma, sans-serif; margin-left: 20px;">⭐ Mission 4: Can we encode numbers? <strong>x + b mod m</strong></div>
-                    <div style="font-size: 15px; font-family: Verdana, Geneva, Tahoma, sans-serif; margin: 40px;" >Click here for instructions on how to encode numbers <span id="arrow-container3">▾</span></div>
+                    <div style="font-size: 15px; font-family: Verdana, Geneva, Tahoma, sans-serif; margin: 40px;" >Click here twice for instructions on how to encode numbers <span id="arrow-container3">▾</span></div>
                 <div class="instruction-content" id="instructions-container3">
                     <p id="instruction-text-container3"></p>
                     <div class="nav-buttons">
@@ -190,7 +190,7 @@
                 </div>
             </div>
 
-
+            <p><strong>Tip: Don't type in a number bigger than 100!!</strong></p>
             <div id="container3" class="container" style = "position: relative">
                 <div class="wheel-wrapper" style = "position: relative; height: 900px"></div>
                     <!-- <textarea id="inputText" placeholder="Enter text to encrypt..." right="0px" oninput="setTimeout(encryptText,1500)"></textarea>
@@ -219,7 +219,7 @@
 
                 <div class="toggle-instructions" onclick="toggleInstructions('container4')">
                     <div class="instruction-title" style="font-size: 30px; font-family: Verdana, Geneva, Tahoma, sans-serif; margin-left: 20px;">⭐ Mission 5: Modulo NOT 26 😎</div>
-                        <div style="font-size: 15px; font-family: Verdana, Geneva, Tahoma, sans-serif; margin: 40px;" >Click here for instructions on how to encode numbers with modulus not 26 <span id="arrow-container4">▾</span></div>
+                        <div style="font-size: 15px; font-family: Verdana, Geneva, Tahoma, sans-serif; margin: 40px;" >Click here twice for instructions on how to encode numbers with modulus not 26 <span id="arrow-container4">▾</span></div>
                     <div class="instruction-content" id="instructions-container4">
                         <p id="instruction-text-container4"></p>
                         <div class="nav-buttons">
@@ -229,6 +229,7 @@
                     </div>
                 </div>
 
+                <p><strong>Tip: Don't type in a number bigger than 100!!</strong></p>
                 <div id="container4" class="container" style = "position: relative">
                     <div class="wheel-wrapper" style = "position: relative; height: 900px"></div>
                         <!-- <textarea id="inputText" placeholder="Enter text to encrypt..." right="0px" oninput="setTimeout(encryptText,1500)"></textarea>
@@ -260,7 +261,7 @@
 
                     <div class="toggle-instructions" onclick="toggleInstructions('container5')">
                         <div class="instruction-title" style="font-size: 30px; font-family: Verdana, Geneva, Tahoma, sans-serif; margin-left: 20px;">⭐ Mission 6: No Wheel 😎</div>
-                            <div style="font-size: 15px; font-family: Verdana, Geneva, Tahoma, sans-serif; margin: 40px;" >Click here for instructions on how to solve modulus questions without the wheels <span id="arrow-container5">▾</span></div>
+                            <div style="font-size: 15px; font-family: Verdana, Geneva, Tahoma, sans-serif; margin: 40px;" >Click here twice for instructions on how to solve modulus questions without the wheels <span id="arrow-container5">▾</span></div>
                         <div class="instruction-content" id="instructions-container5">
                             <p id="instruction-text-container5"></p>
                             <div class="nav-buttons">

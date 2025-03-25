@@ -41,67 +41,67 @@ const skewAngle = 162;
   
   
 //  Finds which device it is used in
-  const mediaQueryMobile = window.matchMedia('(min-width: 320px)')
-  const mediaQueryTablet = window.matchMedia('(min-width: 481px)')
-  const mediaQueryLaptop = window.matchMedia('(min-width: 769px)')
-  const mediaQueryDesktop = window.matchMedia('(min-width: 1025px)')
-  const mediaQueryExtra = window.matchMedia('(min-width: 1201px)')
+  // const mediaQueryMobile = window.matchMedia('(min-width: 320px)')
+  // const mediaQueryTablet = window.matchMedia('(min-width: 481px)')
+  // const mediaQueryLaptop = window.matchMedia('(min-width: 769px)')
+  // const mediaQueryDesktop = window.matchMedia('(min-width: 1025px)')
+  // const mediaQueryExtra = window.matchMedia('(min-width: 1201px)')
   
 //  Global variable
-  let mediaQuery = []
-  let mobile, tablet, laptop, desktop, extra = false
+  // let mediaQuery = []
+  // let mobile, tablet, laptop, desktop, extra = false
 //   Determines which is the active media screen
-  function mediaSize(e) {
-    if (mediaQueryMobile.matches) {
-      mediaQuery = []
-      mediaQuery.push('mobile')
-    }
-    if (mediaQueryTablet.matches) {
-      mediaQuery = []
-      mediaQuery.push('tablet')
-    }
-    if (mediaQueryLaptop.matches) {
-      mediaQuery = []
-      mediaQuery.push('laptop')
-    }
-    if (mediaQueryDesktop.matches) {
-      mediaQuery = []
-      mediaQuery.push('desktop')
-    }
-    if (mediaQueryExtra.matches) {
-      mediaQuery = []
-      mediaQuery.push('extra')
-    }
-    console.log(mediaQuery)
-    if (mediaQuery[0] === 'mobile') {
-      tablet, laptop, desktop, extra = false
-      mobile = true
-    }
-    if (mediaQuery[0] === 'tablet') {
-      mobile, laptop, desktop, extra = false
-      tablet = true
-    }
-    if (mediaQuery[0] === 'laptop') {
-      tablet, mobile, desktop, extra = false
-      laptop = true
-    }
-    if (mediaQuery[0] === 'desktop') {
-      tablet, laptop, mobile, extra = false
-      desktop = true
-    }
-    if (mediaQuery[0] === 'extra') {
-      tablet, laptop, desktop, mobile = false
-      extra = true
-    }
-  }
-//  Flexible to adjustments of screen size
-  mediaQueryMobile.addListener(mediaSize)
-  mediaQueryTablet.addListener(mediaSize)
-  mediaQueryLaptop.addListener(mediaSize)
-  mediaQueryDesktop.addListener(mediaSize)
-  mediaQueryExtra.addListener(mediaSize)
-//   Initialisation when the page loads
-  mediaSize()
+//   function mediaSize(e) {
+//     if (mediaQueryMobile.matches) {
+//       mediaQuery = []
+//       mediaQuery.push('mobile')
+//     }
+//     if (mediaQueryTablet.matches) {
+//       mediaQuery = []
+//       mediaQuery.push('tablet')
+//     }
+//     if (mediaQueryLaptop.matches) {
+//       mediaQuery = []
+//       mediaQuery.push('laptop')
+//     }
+//     if (mediaQueryDesktop.matches) {
+//       mediaQuery = []
+//       mediaQuery.push('desktop')
+//     }
+//     if (mediaQueryExtra.matches) {
+//       mediaQuery = []
+//       mediaQuery.push('extra')
+//     }
+//     console.log(mediaQuery)
+//     if (mediaQuery[0] === 'mobile') {
+//       tablet, laptop, desktop, extra = false
+//       mobile = true
+//     }
+//     if (mediaQuery[0] === 'tablet') {
+//       mobile, laptop, desktop, extra = false
+//       tablet = true
+//     }
+//     if (mediaQuery[0] === 'laptop') {
+//       tablet, mobile, desktop, extra = false
+//       laptop = true
+//     }
+//     if (mediaQuery[0] === 'desktop') {
+//       tablet, laptop, mobile, extra = false
+//       desktop = true
+//     }
+//     if (mediaQuery[0] === 'extra') {
+//       tablet, laptop, desktop, mobile = false
+//       extra = true
+//     }
+//   }
+// //  Flexible to adjustments of screen size
+//   mediaQueryMobile.addListener(mediaSize)
+//   mediaQueryTablet.addListener(mediaSize)
+//   mediaQueryLaptop.addListener(mediaSize)
+//   mediaQueryDesktop.addListener(mediaSize)
+//   mediaQueryExtra.addListener(mediaSize)
+// //   Initialisation when the page loads
+//   mediaSize()
   
   let counter = 0
   

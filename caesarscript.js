@@ -2,10 +2,7 @@ const outerWheel = document.querySelector('.outer-wheel');
 const innerWheel = document.querySelector('.inner-wheel');
 const centerWheel = document.querySelector('.center-wheel');
 const hideWheel = document.querySelector('.hide-wheel');
-const container = document.querySelector('.container')
-// Commenting the key since we define different key per container
-//   let key = document.querySelector('.key');
-//   const body = document.querySelector('body')
+const container = document.querySelector('.container');
 const container1 = document.getElementById('container1');
 const container1_1 = document.getElementById('container1_1');
 const container2 = document.getElementById('container2');
@@ -39,71 +36,7 @@ const numSegments = charSet.length;
 const skewAngle = 162;
 
   
-  
-//  Finds which device it is used in
-  // const mediaQueryMobile = window.matchMedia('(min-width: 320px)')
-  // const mediaQueryTablet = window.matchMedia('(min-width: 481px)')
-  // const mediaQueryLaptop = window.matchMedia('(min-width: 769px)')
-  // const mediaQueryDesktop = window.matchMedia('(min-width: 1025px)')
-  // const mediaQueryExtra = window.matchMedia('(min-width: 1201px)')
-  
-//  Global variable
-  // let mediaQuery = []
-  // let mobile, tablet, laptop, desktop, extra = false
-//   Determines which is the active media screen
-//   function mediaSize(e) {
-//     if (mediaQueryMobile.matches) {
-//       mediaQuery = []
-//       mediaQuery.push('mobile')
-//     }
-//     if (mediaQueryTablet.matches) {
-//       mediaQuery = []
-//       mediaQuery.push('tablet')
-//     }
-//     if (mediaQueryLaptop.matches) {
-//       mediaQuery = []
-//       mediaQuery.push('laptop')
-//     }
-//     if (mediaQueryDesktop.matches) {
-//       mediaQuery = []
-//       mediaQuery.push('desktop')
-//     }
-//     if (mediaQueryExtra.matches) {
-//       mediaQuery = []
-//       mediaQuery.push('extra')
-//     }
-//     console.log(mediaQuery)
-//     if (mediaQuery[0] === 'mobile') {
-//       tablet, laptop, desktop, extra = false
-//       mobile = true
-//     }
-//     if (mediaQuery[0] === 'tablet') {
-//       mobile, laptop, desktop, extra = false
-//       tablet = true
-//     }
-//     if (mediaQuery[0] === 'laptop') {
-//       tablet, mobile, desktop, extra = false
-//       laptop = true
-//     }
-//     if (mediaQuery[0] === 'desktop') {
-//       tablet, laptop, mobile, extra = false
-//       desktop = true
-//     }
-//     if (mediaQuery[0] === 'extra') {
-//       tablet, laptop, desktop, mobile = false
-//       extra = true
-//     }
-//   }
-// //  Flexible to adjustments of screen size
-//   mediaQueryMobile.addListener(mediaSize)
-//   mediaQueryTablet.addListener(mediaSize)
-//   mediaQueryLaptop.addListener(mediaSize)
-//   mediaQueryDesktop.addListener(mediaSize)
-//   mediaQueryExtra.addListener(mediaSize)
-// //   Initialisation when the page loads
-//   mediaSize()
-  
-  let counter = 0
+
   
 //   Whenever user inputs in the key for Activity 1
   keyInput1.addEventListener('input', function(input){
@@ -118,9 +51,7 @@ const skewAngle = 162;
     outerWheel1.style.transform = `translate(-50%, -50%) rotate(0deg)` 
     innerWheel1.style.transform =  `translate(-50%, -50%) rotate(${key * (360 / numSegments)}deg)` 
     centerWheel1.style.transform = `translate(-50%, -50%) rotate(0deg) rotate(${key * - (360 / numSegments)}deg)`
-    counter = key;
-    // delayTimer();
-    //setTimeout(outerHighlight,500);
+
     setTimeout(delayHighlightOutwheel(container1, inputText1, key1),1500);
     encryptText(container1, keyInput1, inputText1, outputText1);
     checkEncipher(event);
@@ -130,7 +61,7 @@ const skewAngle = 162;
 
   keyInput1_1.addEventListener('input', function(input){
     let key = input.target.value
-    // Scope the wheels to container2
+    // Scope the wheels to container1_1
     const outerWheel1_1 = container1_1.querySelector('.outer-wheel');
     const innerWheel1_1 = container1_1.querySelector('.inner-wheel');
     const centerWheel1_1 = container1_1.querySelector('.center-wheel');
@@ -139,11 +70,8 @@ const skewAngle = 162;
     outerWheel1_1.style.transform = `translate(-50%, -50%) rotate(0deg)` 
     innerWheel1_1.style.transform =  `translate(-50%, -50%) rotate(${key * (360 / numSegments)}deg)` 
     centerWheel1_1.style.transform = `translate(-50%, -50%) rotate(0deg) rotate(${key * - (360 / numSegments)}deg)`
-    counter = key
-    // delayTimer();
-    //setTimeout(outerHighlight,500);
+    
     encryptText(container1_1, keyInput1_1, inputText1_1, userOutputText1_1);
-    // checkEncipher(container1_1, key1_1, inputText1_1, userOutputText1_1);
   })
 
   keyInput2.addEventListener('input', function(input){
@@ -157,16 +85,13 @@ const skewAngle = 162;
     outerWheel2.style.transform = `translate(-50%, -50%) rotate(0deg)` 
     innerWheel2.style.transform =  `translate(-50%, -50%) rotate(${key * (360 / numSegments)}deg)` 
     centerWheel2.style.transform = `translate(-50%, -50%) rotate(0deg) rotate(${key * - (360 / numSegments)}deg)`
-    counter = key
-    // delayTimer();
-    //setTimeout(outerHighlight,500);
-    // encryptText(container2, keyInput2, inputText2, userOutputText2);
+   
     checkEncipher(container2, keyInput2, inputText2, userOutputText2);
   })
 
   keyInput3.addEventListener('input', function(input){
     let key = input.target.value
-    // Scope the wheels to container2
+    // Scope the wheels to container3
     const outerWheel3 = container3.querySelector('.outer-wheel');
     const innerWheel3 = container3.querySelector('.inner-wheel');
     const centerWheel3 = container3.querySelector('.center-wheel');
@@ -175,18 +100,15 @@ const skewAngle = 162;
     outerWheel3.style.transform = `translate(-50%, -50%) rotate(0deg)` 
     innerWheel3.style.transform =  `translate(-50%, -50%) rotate(${key * (360 / numSegments)}deg)` 
     centerWheel3.style.transform = `translate(-50%, -50%) rotate(0deg) rotate(${key * - (360 / numSegments)}deg)`
-    counter = key
-    // delayTimer();
-    //setTimeout(outerHighlight,500);
+    
     caesarNumCipherRed('inputText3', 'key3', 26, 'userOutputText3', 'workingOut3');
-    // encryptText(container3, keyInput3, inputText3, userOutputText3);
-    // checkEncipher(container3, keyInput3, inputText3, userOutputText3);
+    
   })
 
   keyInput4.addEventListener('input', function(input){
     let key = input.target.value
     const newSegments = parseInt(document.getElementById('segmentSlider').value);
-    // Scope the wheels to container2
+    // Scope the wheels to container4
     const outerWheel4 = container4.querySelector('.outer-wheel');
     const innerWheel4 = container4.querySelector('.inner-wheel');
     const centerWheel4 = container4.querySelector('.center-wheel');
@@ -195,11 +117,7 @@ const skewAngle = 162;
     outerWheel4.style.transform = `translate(-50%, -50%) rotate(0deg)` 
     innerWheel4.style.transform =  `translate(-50%, -50%) rotate(${key * (360 / newSegments)}deg)` 
     centerWheel4.style.transform = `translate(-50%, -50%) rotate(0deg) rotate(${key * - (360 / newSegments)}deg)`
-    counter = key
-    // delayTimer();
-    // //setTimeout(outerHighlight,500);
-    // encryptText(container4, key4, inputText4, userOutputText4);
-    // checkEncipher(container4, key4, inputText4, userOutputText4);
+  
     caesarNumCipherMod('inputText4', 'key4', sliderMod, 'userOutputText4', 'workingOut4')
   })
 
@@ -208,10 +126,12 @@ const skewAngle = 162;
     const button = document.querySelector('.btn');
     if (hiddenText.style.display == 'none') {
         hiddenText.style.display = 'block';
-        button.textContent = 'Hide Text'; // Update button text
+        // Update button text
+        button.textContent = 'Hide Text'; 
       } else {
         hiddenText.style.display = 'none';
-        button.textContent = 'Learn more about Caesar cipher!'; // Update button text
+        // Update button text
+        button.textContent = 'Learn more about Caesar cipher!'; 
       }
     }
   
@@ -263,11 +183,7 @@ function caesarWheel(container, charSet, numSegments, skewAngle){
         const outerLi = document.createElement('li');
         outerLi.style.transform = `rotate(${rotateAngle}deg) skewY(${skewAngle}deg)`
 
-        // Adds Characters to each segment of the wheel
-        // const charDiv = document.createElement("div");
-        // charDiv.className = "char";
-        // charDiv.textContent = charSet[i];
-
+        // Adds Char to each segment of the wheel
         if (displayChar) {
             const charDiv = document.createElement('div');
             charDiv.className = 'char';
@@ -276,20 +192,18 @@ function caesarWheel(container, charSet, numSegments, skewAngle){
         }
 
         // Adds Index to each segment of the wheel
-        // const indexDiv = document.createElement("div");
-        // indexDiv.className = "index";
-        // indexDiv.textContent = i;
-
         if (displayIndex) {
             const indexDiv = document.createElement('div');
             indexDiv.className = 'index';
             indexDiv.textContent = i;
 
-            const baseX = -45; // Base X position (center)
+            // Base X position (center)
+            const baseX = -45; 
             const baseY = 170;
-            const xAdjust = -(numSegments - 25) * 1.8;  // Adjust X position
-            const yAdjust = -(numSegments - 25) * 1.5;  // Adjust Y position
-            const rotationAdjust = 10 + (numSegments - 26) * 0.5; // Adjust rotation
+            // Adjust X, Y position
+            const xAdjust = -(numSegments - 25) * 1.8;
+            const yAdjust = -(numSegments - 25) * 1.5;  
+            const rotationAdjust = 10 + (numSegments - 26) * 0.5; 
 
             indexDiv.style.transformOrigin = `${baseX + xAdjust}% ${baseY + yAdjust}%`;
             indexDiv.style.transform = `translate(${baseX + xAdjust}%, ${baseY + yAdjust}%) rotate(${rotationAdjust}deg)`;
@@ -305,10 +219,9 @@ function caesarWheel(container, charSet, numSegments, skewAngle){
         const sliceDiv = document.createElement("div");
         sliceDiv.className = "slice";
 
-        // Append elements to each segment of the wheel
+        // Append list elements to each segment of the wheel
         li.appendChild(sliceDiv);
-        // li.appendChild(charDiv);
-        // li.appendChild(indexDiv);
+        
         outerWheel.appendChild(outerLi)
 
         // Append the segments to the wheel
@@ -323,10 +236,7 @@ function caesarWheel(container, charSet, numSegments, skewAngle){
         innerLi.style.transform = `rotate(${rotateAngle}deg) skewY(${skewAngle}deg)`;
 
 
-        // Adds Characters to each segment of the wheel
-        // const charDiv = document.createElement("div");
-        // charDiv.className = "char";
-        // charDiv.textContent = charSet[i];
+        // Adds Char to each segment of the wheel
         if (displayChar) {
             const charDiv = document.createElement('div');
             charDiv.className = 'char';
@@ -335,9 +245,6 @@ function caesarWheel(container, charSet, numSegments, skewAngle){
         }
         
         // Adds Index to each segment of the wheel
-        // const indexDiv = document.createElement("div");
-        // indexDiv.className = "index";
-        // indexDiv.textContent = i;
         if (displayIndex) {
             const indexDiv = document.createElement('div');
             indexDiv.className = 'index';
@@ -364,10 +271,9 @@ function caesarWheel(container, charSet, numSegments, skewAngle){
         const sliceDiv = document.createElement("div");
         sliceDiv.className = "slice";
 
-        // Append elements to each segment of the wheel
+        // Append list elements to each segment of the wheel
         li.appendChild(sliceDiv);
-        // li.appendChild(charDiv);
-        // li.appendChild(indexDiv);
+        
         innerWheel.appendChild(innerLi);
 
         // Append the segments to the wheel
@@ -375,6 +281,7 @@ function caesarWheel(container, charSet, numSegments, skewAngle){
     }
 }
 
+// Keeps track of instruction steps
 let stepInstructions = { "container1": 0, "container1_1": 0, "container2": 0, "container3": 0, "container4": 0, "container5": 0 };
 
 // Instruction steps
@@ -498,14 +405,13 @@ let instructions = {
 };
 
 
-// let stepInstructions = { "container1": 0, "container1_1": 0, "container2": 0 };
+
 
 function toggleInstructions(container) {
   let content = document.getElementById(`instructions-${container}`);
   let arrow = document.getElementById(`arrow-${container}`);
 
     if (window.getComputedStyle(content).display !== "none"){
-    // if(currentDisplay !== "none") {
         content.style.display = "none";
         arrow.innerHTML = "▾";
     } else {
@@ -517,7 +423,8 @@ function toggleInstructions(container) {
 }
 
 function nextStep(event, container) {
-    event.stopPropagation(); // Prevent toggle box from closing
+    // Prevents toggle box from collapsing
+    event.stopPropagation(); 
     if (stepInstructions[container] <= instructions[container].length - 1) {
         stepInstructions[container]++;
         document.getElementById(`instruction-text-${container}`).innerHTML = instructions[container][stepInstructions[container]];
@@ -525,22 +432,13 @@ function nextStep(event, container) {
 }
 
 function prevStep(event, container) {
-    event.stopPropagation(); // Prevent toggle box from closing
+    // Prevents toggle box from collapsing
+    event.stopPropagation(); 
     if (stepInstructions[container] > 0) {
         stepInstructions[container] -= 1;
         document.getElementById(`instruction-text-${container}`).innerHTML = instructions[container][stepInstructions[container]];
     }
 }
-
-
-
-
-
-
-
-
-
-
 
 
     function changeSegment() {
@@ -554,7 +452,7 @@ function prevStep(event, container) {
         const centerWheel = document.querySelector('#container4 .center-wheel');
 
         if (outerWheel && innerWheel && centerWheel) {
-            // Temporarily store the center wheel
+            // Temporarily removes the center wheel
             innerWheel.removeChild(centerWheel);
     
         // Remove contents of current wheels
@@ -582,75 +480,33 @@ function prevStep(event, container) {
             }
             return result.join('');
         }
-   
-
-// caesarWheel(container1);
-// caesarWheel(container2);
-
-//  Code that used to call highlighting but it was just event inside no container
-// document.addEventListener('keydown', highlightInput(container1));
-// document.addEventListener('keydown', delayHighlightOutwheel(container1));
 
 
-//COPY the function highlights inner and outer at the same time and makes it disappear at the same time with enciphered coming at 1sec delay.
-// function to highlight the characters on keydown event from the user
-//keydownevent is just a placeholder
-
-
-
-
-// Function to highlight the Inner Wheel characters on keydown event from the user 
-/*function highlightInput(container, event){
-let innerWheel = container.querySelector('.inner-wheel'); 
-let outerWheel = container.querySelector('.outer-wheel');
-// Gets all the char elements of the Inner Wheel 
-const charSetInElements = innerWheel.getElementsByClassName('char');
-const input = event.key;
-const charSetOutElements = outerWheel.getElementsByClassName('char');*/
-/* This part was commented out from before
-const charSetOutElements = outerWheel.getElementsByClassName('char')
-const shift = parseInt(document.getElementById('key').value)%numSegments ||0;
-const translatedChar = caesarCipher(input, shift); */
-
-/*THIS COMMENTED OUT SINCE IT WAS EXPERIMENTED 
-setTimeout(() => removeInHighlight(container, charSetInElements, charSetOutElements),2000);
-
-if (input.match(/^[A-Za-z]$/)){
-// Converts input character to ASCII code
-const inCode = input.charCodeAt(0);
-// ASCII base
-const inBase = input === input.toLowerCase() ? 97 : 65;
-// Calculate index (0-25)
-const inCharIndex = inCode - inBase;
-
-// Highlights Inner Wheel of the corresponding plaintext
-if (charSetInElements[inCharIndex]){
-  //setTimeout(() => removeHighlight(charSetElements),1000);
-  charSetInElements[inCharIndex].classList.add('innerHighlight');
-}
-}
-
-}*/
 
 container1.addEventListener('keydown', function(event) {
-    const inputLetter = event.key; // Normalize input to uppercase
-    setTimeout(() => highlightInput(container1, inputLetter),500); // Highlight only in container1
+    const inputLetter = event.key; 
+    // Highlight only on inner wheel container1 with 0.5 sec delay
+    setTimeout(() => highlightInput(container1, inputLetter),500); 
+    // Highlight only on outer wheel container1 with 1 sec delay
     setTimeout(() => highlightOutwheel(container1, inputLetter, keyInput1),1000);
-    // delayHighlightOutwheel(event, container, inputLetter, keyInput);
 });
 
 container1_1.addEventListener('keydown', function(event) {
-    const inputLetter = event.key; // Normalize input to uppercase
-    setTimeout(() => highlightInput(container1_1, inputLetter),500);  // Highlight only in container1_1
+    const inputLetter = event.key; 
+    // Highlight only on inner wheel container1_1 with 0.5 sec delay
+    setTimeout(() => highlightInput(container1_1, inputLetter),500); 
+    // Highlight only on outer wheel container1_1 with 1 sec delay
     setTimeout(() => highlightOutwheel(container1_1, inputLetter, keyInput1_1),1000);
 });
 
 container2.addEventListener('keydown', function(event) {
-    const inputLetter = event.key; // Normalize input to uppercase
+    const inputLetter = event.key; 
     // Detect active textarea
     const activeElement = document.activeElement;
     if (activeElement === inputText2) {
-      setTimeout(() => highlightInput(container2, inputLetter),500);  // Highlight only in container2
+      // Highlight only on inner wheel container2 with 0.5 sec delay
+      setTimeout(() => highlightInput(container2, inputLetter),500);
+      // Highlight only on outer wheel container2 with 1 sec delay
       setTimeout(() => highlightOutwheel(container2, inputLetter, keyInput2),1000);
     } else if (activeElement === userOutputText2){
       removeInHighlight(charSetInElements, charSetOutElements);
@@ -660,46 +516,6 @@ container2.addEventListener('keydown', function(event) {
 document.addEventListener('keydown', delayHighlightOutwheel);
     
 
-    //COPY the function highlights inner and outer at the same time and makes it disappear at the same time with enciphered coming at 1sec delay.
-     // function to highlight the characters on keydown event from the user
-    //keydownevent is just a placeholder
-    /*function highlightInput(event){
-      const charSetInElements = innerWheel.getElementsByClassName('char');
-      const input = event.key;
-      const charSetOutElements = outerWheel.getElementsByClassName('char')
-      const shift = parseInt(document.getElementById('key').value)%numSegments ||0;
-      const translatedChar = caesarCipher(input, shift);
-
-      setTimeout(() => removeInHighlight(charSetInElements, charSetOutElements),1000);
-
-      //for (let i = 0; i < input.length; i++){
-      if (input.match(/^[A-Za-z]$/)){
-        const inCode = input.charCodeAt(0);
-        const inBase = input === input.toLowerCase() ? 97 : 65; // ASCII base 
-        const inCharIndex = inCode - inBase; // Calculate index (0-25)
-
-        if (charSetInElements[inCharIndex]){
-          //setTimeout(() => removeHighlight(charSetElements),1000);
-          charSetInElements[inCharIndex].classList.add('innerHighlight');
-        }
-      }
-
-      //setTimeout(() => removeHighlight(charSetOutElements),1000);
-
-      if (translatedChar.match(/^[A-Za-z]$/)){
-        const outCode = translatedChar.charCodeAt(0);
-        const outBase = translatedChar === translatedChar.toLowerCase() ? 97 : 65;
-        const outCharIndex = outCode - outBase;
-
-        if (charSetOutElements[outCharIndex]){
-          charSetOutElements[outCharIndex].classList.add('outerHighlight');
-        }
-      }*/
-
-
-
-
-
     // Function to highlight the Inner Wheel characters on keydown event from the user 
     function highlightInput(container, inputLetter){
       // Gets all the char elements of the Inner Wheel 
@@ -707,10 +523,8 @@ document.addEventListener('keydown', delayHighlightOutwheel);
       const charSetInElements = innerWheel.getElementsByClassName('char');
       const outerWheel = container.querySelector('.outer-wheel');
       const charSetOutElements = outerWheel.getElementsByClassName('char');
-      /* const charSetOutElements = outerWheel.getElementsByClassName('char')
-      const shift = parseInt(document.getElementById('key').value)%numSegments ||0;
-      const translatedChar = caesarCipher(input, shift); */
-
+      
+      // Removes highlight after 3 sec
       setTimeout(() => removeInHighlight(charSetInElements, charSetOutElements),3000);
 
         if (inputLetter.match(/^[A-Za-z]$/)){
@@ -723,10 +537,8 @@ document.addEventListener('keydown', delayHighlightOutwheel);
 
             // Highlights Inner Wheel of the corresponding plaintext
             if (charSetInElements[inCharIndex]){
-            //setTimeout(() => removeHighlight(charSetElements),1000);
             charSetInElements[inCharIndex].style.color = "blue";
             charSetInElements[inCharIndex].style.fontWeight = "bold";
-            // charSetInElements[inCharIndex].classList.add('innerHighlight');
             }
         }
     }
@@ -748,6 +560,7 @@ document.addEventListener('keydown', delayHighlightOutwheel);
         // Calculate index (0-25)
         const outCharIndex = outCode - outBase;
 
+        // Highlights Outer Wheel of the corresponding ciphertext
         if (charSetOutElements[outCharIndex]){
           charSetOutElements[outCharIndex].style.color = "yellow";
           charSetOutElements[outCharIndex].style.fontWeight = "bold";
@@ -766,12 +579,10 @@ document.addEventListener('keydown', delayHighlightOutwheel);
       for (let char of charSetInElements) {
           char.style.color = "";
           char.style.fontWeight = "";
-            // char.classList.remove('innerHighlight'); 
             }
       for (let char of charSetOutElements){
         char.style.color = "";
         char.style.fontWeight = "";
-        // char.classList.remove('outerHighlight');
       }
           }          
 
@@ -800,67 +611,11 @@ document.addEventListener('keydown', delayHighlightOutwheel);
                 messageElement.style.color = "red"; 
             }
     }
-    // Clears the message when user Enciphered Input is shorter than the plaintext
+    // Clears the message when user's attempt of enciphering is shorter than the plaintext
     else if (userEnInput.length < userOgInput.length) {
     messageElement.textContent = '';}
     }
-  /*This highlight function actually works
-
-  function highlight(){
-    let charSetElements = innerWheel.getElementsByClassName('char');
-    const input = document.getElementById('inputText').value;
-    for (let i = 0; i < input.length; i++){
-      let char = input[i];
-      if (char.match(/[a-z]/i)) {
-      const code = input.charCodeAt(i);
-      let base = (char === char.toLowerCase()) ? 97 : 65;
-      let charIndex = code - base;
-      charSetElements[charIndex].classList.add('innerHighlight');
-      }
-    }
-  }*/
   
-
-  /*Highlights inner wheel as user inputs 
-  function innerHighlight(){
-    let charSetElements = innerWheel.getElementsByClassName('char');
-    const input = document.getElementById('inputText').value;
-    for (let char of charSetElements) {
-    char.classList.remove('innerHighlight');  // Remove 'innerHighlight' class
-    }
-
-    
-    for (let i = 0; i < input.length; i++){
-      let char = input[i];
-      if (char.match(/[a-z]/i)) {
-      const code = input.charCodeAt(i);
-      let base = (char === char.toLowerCase()) ? 97 : 65;
-      let charIndex = code - base;
-      charSetElements[charIndex].classList.add('innerHighlight');
-      }
-    }
-  }
-
-  function outerHighlight(){
-    let charSetElements = outerWheel.getElementsByClassName('char');
-    const input = document.getElementById('inputText').value;
-    const shift = parseInt(document.getElementById('key').value)%numSegments ||0;
-    const translatedText = caesarCipher(input, shift);
-    
-    for (let char of charSetElements) {
-    char.classList.remove('outerHighlight');  // Remove 'outerHighlight' class
-    }
-
-    for (let i = 0; i < translatedText.length; i++){
-      let char = translatedText[i];
-      if (char.match(/[a-z]/i)) {
-      const code = translatedText.charCodeAt(i);
-      let base = (char === char.toLowerCase()) ? 97 : 65;
-      let charIndex = code - base;
-      charSetElements[charIndex].classList.add('outerHighlight');
-      }
-    }
-  } */
 
 function encryptText(container, keyInput, inputText, outputText) {
     const input = inputText.value;
@@ -869,26 +624,6 @@ function encryptText(container, keyInput, inputText, outputText) {
   
     outputText.value = translatedText;
 }
-
-// Copy of OG encryptText func
-/*function encryptText() {
-    const input = document.getElementById('inputText1').value;
-    const shift = parseInt(document.getElementById('key').value)%numSegments ||0;
-    const translatedText = caesarCipher(input, shift);
-  
-    document.getElementById('outputText1').value = translatedText;
-}*/
-
-/*Goes with the Inner and Outer highlight function
-function delayTimer() {
-  let delay; 
-  clearTimeout(delay); // Reset the time up
-  delay = setTimeout(() => {
-      innerHighlight();  // Call inner highlight after delay
-      setTimeout(outerHighlight, 500); // Call outer highlight after 0.5-second delay
-      setTimeout(encryptedText, 1000); // Show encrypted character after another 1-second delay
-  }, 1000); // Delay of 1 second after last input
-}*/
 
     
     document.getElementById('segmentSlider').addEventListener("input", function() {
@@ -936,7 +671,6 @@ function delayTimer() {
             // Calculating caesar shift
             let shiftedNum = (num + shift);
             workingOut.innerHTML += `<br>After shift: ${num} + ${shift} = ${shiftedNum}`;
-            // workingOut.innerHTML += `<br>After shift and modulus: (${num} + ${shift}) % ${mod} = ${shiftedNum}`;
 
             if (shiftedNum >= mod){
                 workingOut.innerHTML += `<br>The number ${shiftedNum} is greater than or equal to ${mod} so we need to reduce it! <br>Reducing steps:`;
@@ -992,7 +726,6 @@ function delayTimer() {
                 workingOut.innerHTML += `<br>The number ${num} is greater than or equal to ${mod} so we need to reduce it!`;
                 // num = num % mod; 
                 while(num >= mod){
-                //    workingOut.innerHTML += `<br>Reducing steps: ${num} - ${mod}`;
                     num = num - mod;
                 }
                 workingOut.innerHTML += `<br>Reduced Number: ${num} <br><strong>${numbers[index]} &#8801 ${num} modulo ${mod}</strong>`;
@@ -1001,14 +734,12 @@ function delayTimer() {
             // Calculating caesar shift
             let shiftedNum = (num + shift);
             workingOut.innerHTML += `<br>After shift: (${num} + ${shift}) = ${shiftedNum}`
-            // workingOut.innerHTML += `<br>After shift and modulus: (${num} + ${shift}) % ${mod} = ${shiftedNum}`;
-
+            
             if (shiftedNum >= mod){
                 workingOut.innerHTML += `<br>The number ${shiftedNum} is greater than or equal to ${mod} so we need to reduce it!`;
             
                 // num = num % mod; 
                 while(shiftedNum >= mod){
-                //    workingOut.innerHTML += `<br>${shiftedNum} - ${mod} = ${shiftedNum - mod}`;
                    shiftedNum = shiftedNum - mod;
                 }
                 workingOut.innerHTML += `<br>Reduced Number: ${shiftedNum} <br><strong>${num + shift} &#8801 ${shiftedNum} modulo ${mod}</strong> <br><strong>So, ${numbers[index]} + ${shift} &#8801 ${shiftedNum} modulo ${mod}</strong>`;
@@ -1036,28 +767,6 @@ function delayTimer() {
         }
     });
 
-        //     for (let i = 0; i < numbers.length; i++) {
-        //         console.clear();
-        //         let num = numbers[i];
-        //         console.log(`Input Number: ${num}`);
-        //         // Reduce numbers greater than number of segments in the wheel (modulus)
-        //         if (num <= mod){
-        //             console.log(`The number you inputted is greater than ${mod} so we need to reduce it!`);
-        //             while(num <= mod){
-        //                 console.log(`${num - mod}`);
-        //                 num = num - mod;
-        //             }
-        //         }
-        //         else if(num < mod){
-        //             console.log(`Your input number: ${num}`);
-        //             shiftedNum = ((num + shift) % mod);
-        //             console.log(`After modulus: ${(num + shift) % mod} so ${shiftedNum}`);
-        //         }
-                
-        //         setTimeout(() => increaseIndex(i + 1), 1500);
-        //     }
-        // }
-        // result.push(shiftedNum);}
 
   function subtractionTable() {
     let bar = parseInt(document.getElementById("subtractionSlider").value);
@@ -1065,10 +774,11 @@ function delayTimer() {
     let topRow = document.getElementById("topRow");
     let bottomRow = document.getElementById("bottomRow");
     
+    // Initialise the table
     topRow.innerHTML = "";
     bottomRow.innerHTML = "";
 
-    
+    // Creating bottom row
     for (let i = 0; i < bar; i++) {
         let cell = document.createElement("td");
         cell.textContent = i;
@@ -1080,7 +790,8 @@ function delayTimer() {
         }
         bottomRow.appendChild(cell);
     }
-    
+
+    // Creating top row
     for (let i = bar; i < 2 * bar; i++) {
         let cell = document.createElement("td");
         cell.textContent = i;
@@ -1107,8 +818,6 @@ function checkEncipherNum(inputText, keyInput, outputText, workingOutId){
 
     let numbers = numStr.split(" ");
     let userNumbers = userAttempt.split(" ");
-    
-    // caesarNumCipherMod(inputText, shift, modValue, outputText, workingOut);
 
     /* Check if the user's input matches the correct cipher */
     // Checks for empty inputs
@@ -1120,10 +829,9 @@ function checkEncipherNum(inputText, keyInput, outputText, workingOutId){
 
 
 
-
+    // Prompt for entering all numbers
     if (numbers.length !== userNumbers.length) {
       messageElement.innerHTML = "Please enter both numbers.";
-      // messageElement.textContent = '';
       return;
     }
 
@@ -1162,21 +870,3 @@ function checkEncipherNum(inputText, keyInput, outputText, workingOutId){
 
     }
 
-
-    // The message only appears when the user Enciphered Input length matches the length of the plaintext   
-    // else if (userEnInput.length >= correctEnc.length) {
-        // if (outputNum === correctEnc) {
-        //     messageElement.innerHTML = "Correct Encipher Number!";
-        //     messageElement.style.color = "green"; 
-        // } 
-        // else {
-        //         messageElement.innerHTML = "Incorrect Encipher Number. <br>Please try again.";
-        //         messageElement.style.color = "red"; 
-        //     }
-  
-
-
-
-    // Clears the message when user Enciphered Input is shorter than the plaintext
-    // else if (userEnInput.length < userOgInput.length) {
-    // messageElement.textContent = '';}

@@ -13,6 +13,8 @@ const outputText1 = document.getElementById('outputText1');
 const scaleFactor1 = document.getElementById('sf1');
 const scaleFactor1_1 = document.getElementById('sf1_1');
 const scaleFactor2 = document.getElementById('sf2');
+const scaleFactor3 = document.getElementById('sf3');
+const scaleFactor4 = document.getElementById('sf4');
 const keyInput1 = document.getElementById('key1');
 const keyInput1_1 = document.getElementById('key1_1');
 const inputText1_1 = document.getElementById('inputText1_1');
@@ -149,6 +151,30 @@ let animationChar;
     affineWheel(container2, charSet, numSegments, 162, sf, userOutputText2);
 });
 
+scaleFactor3.addEventListener('input', function (input) {
+  // Converts scaling factor to integer
+  let sf = parseInt(input.target.value); 
+  const innerWheel = container3.querySelector('.inner-wheel');
+  const centerWheel3 = container3.querySelector('.center-wheel');
+
+  // If input is cleared, stop animation and clear wheel
+  if (isNaN(sf)) {
+    innerWheel.innerHTML = ''; 
+    clearTimeout(animationChar);
+    for (let i = 0; i < numSegments; i++){
+      const li = document.createElement('li');
+      const rotateAngle = (360 / numSegments) * i; 
+      li.style.transform = `rotate(${rotateAngle}deg) skewY(${skewAngle}deg)`;
+      innerWheel.appendChild(li);
+    };
+    innerWheel.appendChild(centerWheel3);
+    return;
+  }
+
+  clearTimeout(animationChar);
+  affineWheel(container3, charSet, numSegments, 162, sf, userOutputText3);
+});
+
   keyInput3.addEventListener('input', function(input){
     let key = input.target.value
     // Scope the wheels to container3
@@ -161,9 +187,10 @@ let animationChar;
     innerWheel3.style.transform =  `translate(-50%, -50%) rotate(${key * (360 / numSegments)}deg)` 
     centerWheel3.style.transform = `translate(-50%, -50%) rotate(0deg) rotate(${key * - (360 / numSegments)}deg)`
     counter = key
-    delayTimer();
-    encryptText(container3, key3, inputText3, userOutputText3);
-    checkEncipher(container3, key3, inputText3, userOutputText3);
+    // delayTimer();
+    affineNumCipherRed('inputText3', 'key3', 'sf3', 26, 'userOutputText3', 'workingOut3');
+    // encryptText(container3, key3, inputText3, userOutputText3);
+    // checkEncipher(container3, key3, inputText3, userOutputText3);
   });
 
   keyInput4.addEventListener('input', function(input){
@@ -179,10 +206,44 @@ let animationChar;
     innerWheel4.style.transform =  `translate(-50%, -50%) rotate(${key * (360 / newSegments)}deg)` 
     centerWheel4.style.transform = `translate(-50%, -50%) rotate(0deg) rotate(${key * - (360 / newSegments)}deg)`
     counter = key
-    delayTimer();
+    // delayTimer();
+
+    affineNumCipherMod('inputText4', 'key4', 'sf4', sliderMod, 'userOutputText4', 'workingOut4');
    
-    encryptText(container4, key4, inputText4, userOutputText4);
-    checkEncipher(container4, key4, inputText4, userOutputText4);
+    // encryptText(container4, key4, inputText4, userOutputText4);
+    // checkEncipher(container4, key4, inputText4, userOutputText4);
+  });
+
+  scaleFactor4.addEventListener('input', function (input) {
+    // Converts scaling factor to integer
+    let sf = parseInt(input.target.value); 
+    const innerWheel = container4.querySelector('.inner-wheel');
+    const centerWheel4 = container4.querySelector('.center-wheel');
+  
+    // If input is cleared, stop animation and clear wheel
+    if (isNaN(sf)) {
+      innerWheel.innerHTML = ''; 
+      clearTimeout(animationChar);
+      for (let i = 0; i < numSegments; i++){
+        const li = document.createElement('li');
+        const rotateAngle = (360 / numSegments) * i; 
+        li.style.transform = `rotate(${rotateAngle}deg) skewY(${skewAngle}deg)`;
+        innerWheel.appendChild(li);
+      };
+      innerWheel.appendChild(centerWheel4);
+      return;
+    }
+
+    const newSegments = parseInt(document.getElementById('segmentSlider').value);
+    // Update displayed value
+    document.getElementById('segmentValue').textContent = newSegments; 
+
+    let numSegments = newSegments;
+
+    affineWheel(container4, charSet, numSegments, 162, sf, userOutputText4);
+    clearTimeout(animationChar);
+    affineNumCipherMod('inputText4', 'key4', 'sf4', sliderMod, 'userOutputText4', 'workingOut4');
+  
   });
 
   // Initialise value
@@ -280,6 +341,7 @@ function affineWheel(container, charSet, numSegments, skewAngle, scalingFactor, 
   // Display index only
   else if (container.id === 'container3'|| container.id === 'container4') {
       displayIndex = true;
+      displayChar = false;
   };
 
 // TRYING TO PUT THIS PART INSIDE REVEALCHAR
@@ -394,11 +456,12 @@ sfTimeout = setTimeout(() => {
     const innerLi = document.createElement('li');
     innerLi.style.transform = `rotate(${rotateAngle}deg) skewY(${skewAngle}deg)`;
 
-
+    if (displayChar){
     const charDiv = document.createElement('div');
     charDiv.className = 'char';
     charDiv.textContent = char;
     innerLi.appendChild(charDiv);
+    }
 
     if (displayIndex) {
       const indexDiv = document.createElement('div');
@@ -470,7 +533,7 @@ function disableInputs(checker) {
 }
 
 
-    function changeSegment() {
+    function changeAffSegment() {
         const newSegments = parseInt(document.getElementById('segmentSlider').value);
         // Update displayed value
         document.getElementById('segmentValue').textContent = newSegments; 
@@ -489,7 +552,7 @@ function disableInputs(checker) {
         document.querySelector('#container4 .inner-wheel').innerHTML = "";
 
         // Change the wheel of container4 with the new number of segments
-        caesarWheel(container4, charSet, newSegments, 162);
+        affineWheel(container4, charSet, newSegments, 162, sf4, userOutputText4);
         innerWheel.appendChild(centerWheel);
         }
     }
@@ -608,43 +671,6 @@ function appearDisappearText(id, button) {
       button.textContent = id === 'hint1' ? 'Hint 1 ✨' : 'Hint 2 ✨';
     }
   }
- 
-
-// Calculates affine cipher
-    function affineCipher(str, sf, shift){
-
-        const numSegments = 26;
-        const result = [];
-        for (let i = 0; i < str.length; i++){
-          let char = str[i];
-          if (char.match(/[a-z]/i)) {
-            const code = str.charCodeAt(i);
-            let base = (char === char.toLowerCase()) ? 97 : 65;
-            let x = code - base;
-            char = String.fromCharCode(((sf * x + shift) % numSegments) + base);
-          }
-          result.push(char);
-        }
-        return result.join('');
-    } 
-
-   
-    function encryptAffText(container, keyInput, scaleFactor, inputText, outputText) {
-      const input = inputText.value;
-      const shift = parseInt(keyInput.value)%numSegments ||0;
-      const sf = parseInt(scaleFactor.value);   
-      const translatedText = affineCipher(input, sf, shift);
-    
-      outputText.value = translatedText;
-  }
-
-  function encryptAffTextReturn(container, keyInput, scaleFactor, inputText) {
-    const input = inputText.value;
-    const shift = parseInt(keyInput.value)%numSegments ||0;
-    const sf = parseInt(scaleFactor.value);   
-
-    return affineCipher(input, sf, shift);
-  }
 
 
 container1.addEventListener('keydown', function(event) {
@@ -739,9 +765,43 @@ function removeInHighlight(charSetInElements, charSetOutElements){
     
   }
       }          
-    
 
-          
+    // Calculates affine cipher
+    function affineCipher(str, sf, shift){
+
+      // const numSegments = 26;
+      const result = [];
+      for (let i = 0; i < str.length; i++){
+        let char = str[i];
+        if (char.match(/[a-z]/i)) {
+          const code = str.charCodeAt(i);
+          let base = (char === char.toLowerCase()) ? 97 : 65;
+          let x = code - base;
+          char = String.fromCharCode(((sf * x + shift) % numSegments) + base);
+        }
+        result.push(char);
+      }
+      return result.join('');
+  } 
+
+ 
+  function encryptAffText(container, keyInput, scaleFactor, inputText, outputText) {
+    const input = inputText.value;
+    const shift = parseInt(keyInput.value)%numSegments ||0;
+    const sf = parseInt(scaleFactor.value);   
+    const translatedText = affineCipher(input, sf, shift);
+  
+    outputText.value = translatedText;
+}
+
+function encryptAffTextReturn(container, keyInput, scaleFactor, inputText) {
+  const input = inputText.value;
+  const shift = parseInt(keyInput.value)%numSegments ||0;
+  const sf = parseInt(scaleFactor.value);   
+
+  return affineCipher(input, sf, shift);
+}
+    
     // Checks if user Enciphered guess is correct or incorrect
     function checkAffEncipher(container, keyInput, sf, inputText, outputText){
     const messageElement = document.getElementById('message');  
@@ -749,6 +809,7 @@ function removeInHighlight(charSetInElements, charSetOutElements){
     const userEnInput = outputText.value;
     const shift = parseInt(keyInput.value)%numSegments ||0;
     const sfValue =  parseInt(sf.value);
+
     const correctEnc = encryptAffTextReturn(container, shift, sfValue, inputText);
 
     /* Check if the user's input matches the correct cipher */
@@ -757,11 +818,13 @@ function removeInHighlight(charSetInElements, charSetOutElements){
     messageElement.textContent = '';
     return;
     }
+
     // The message only appears when the user Enciphered Input length matches the length of the plaintext   
-    else if (userEnInput.length >= correctEnc.length) {
+    if (userEnInput.length >= correctEnc.length) {
         if (userEnInput === correctEnc) {
             messageElement.innerHTML = "Correct Encipher Text!";
             messageElement.style.color = "green"; 
+            messageElement.style.fontWeight = "bold";
         } 
         else {
                 messageElement.innerHTML = "Incorrect Encipher Text. <br>Please try again.";
@@ -770,37 +833,38 @@ function removeInHighlight(charSetInElements, charSetOutElements){
             }
     }
     // Clears the message when user Enciphered Input is shorter than the plaintext
-    else if (userEnInput.length < userOgInput.length) {
+    else if (userEnInput.length < correctEnc.length) {
     messageElement.textContent = '';}
     }
 
 
-function encryptText(container, keyInput, inputText, outputText) {
-    const input = inputText.value;
-    const shift = parseInt(keyInput.value)%numSegments ||0;
-    const translatedText = caesarCipher(input, shift);
+// function encryptText(container, keyInput, inputText, outputText) {
+//     const input = inputText.value;
+//     const shift = parseInt(keyInput.value)%numSegments ||0;
+//     const translatedText = caesarCipher(input, shift);
   
-    outputText.value = translatedText;
-}
+//     outputText.value = translatedText;
+// }
 
     
     document.getElementById('segmentSlider').addEventListener("input", function() {
         sliderMod = parseInt(segmentSlider.value);
     });
 
-    // Caesar cipher reduction version, only for container 3
-    function caesarNumCipherRed(inputId, shiftId, mod, outputTextarea, workingOutId){
+    // Affine cipher reduction version, only for container 3
+    function affineNumCipherRed(inputId, shiftId, sfId, mod, outputTextarea, workingOutId){
         // Reads the value in the Textarea
         let numStr = document.getElementById(inputId).value;
         // Converts it to integer
         let shift = parseInt(document.getElementById(shiftId).value);
+        let sf = parseInt(document.getElementById(sfId).value);
         let workingOut = document.getElementById(workingOutId);
         let outputNum = document.getElementById(outputTextarea);
         // Splits the string into an array whenever there is a space, converts each element in array into string, also gets rid of spaces at beginning and end of string
         let numbers = numStr.trim().split(" ").map(num => Number(num));
         let result = [];
 
-
+        shift = isNaN(shift) ? 0 : shift;
 
         function increaseIndexRed(index) {
             // Ensures the function only processes the elements in the array (so it won't run forever) 
@@ -808,6 +872,7 @@ function encryptText(container, keyInput, inputText, outputText) {
                 return; 
             }
             
+            if(isWheelFilled === true){
             // Each number in the array
             let num = numbers[index];
             // Displays which number it will show the working out for
@@ -827,8 +892,8 @@ function encryptText(container, keyInput, inputText, outputText) {
             }
             
             // Calculating caesar shift
-            let shiftedNum = (num + shift);
-            workingOut.innerHTML += `<br>After shift: ${num} + ${shift} = ${shiftedNum}`;
+            let shiftedNum = (num*sf + shift);
+            workingOut.innerHTML += `<br>After jumping size and shift: (${num} * ${sf}) + ${shift} = ${shiftedNum}`;
             // workingOut.innerHTML += `<br>After shift and modulus: (${num} + ${shift}) % ${mod} = ${shiftedNum}`;
 
             if (shiftedNum >= mod){
@@ -839,10 +904,10 @@ function encryptText(container, keyInput, inputText, outputText) {
                    workingOut.innerHTML += `<br>${shiftedNum} - ${mod} = ${shiftedNum - mod}`;
                    shiftedNum = shiftedNum - mod;
                 }
-                workingOut.innerHTML += `<br>Reduced Number: ${shiftedNum} <br><strong>${num + shift} &#8801 ${shiftedNum} modulo ${mod}</strong> <br><strong>So, ${numbers[index]} + ${shift} &#8801 ${shiftedNum} modulo ${mod}</strong>`;
+                workingOut.innerHTML += `<br>Reduced Number: ${shiftedNum} <br><strong>${num*sf + shift} &#8801 ${shiftedNum} modulo ${mod}</strong> <br><strong>So, ${numbers[index]}*${sf} + ${shift} &#8801 ${shiftedNum} modulo ${mod}</strong>`;
             }
             else {
-                workingOut.innerHTML +=`<br><strong>So, ${numbers[index]} + ${shift} &#8801 ${shiftedNum} modulo ${mod}</strong>`
+                workingOut.innerHTML +=`<br><strong>So, ${numbers[index]}*${sf} + ${shift} &#8801 ${shiftedNum} modulo ${mod}</strong>`
             }
 
             // Adding the shifted numbers to an empty array with spaces in between
@@ -851,30 +916,33 @@ function encryptText(container, keyInput, inputText, outputText) {
 
             setTimeout(() => {increaseIndexRed(index + 1)}, 1000);
         }
+      }
         // Initialisation, starts from index 0
         increaseIndexRed(0)
     }
 
-    // Caesar cipher for container 4 where we show the modulus straight away rather than modulus
-    function caesarNumCipherMod(inputId, shiftId, mod, outputTextarea, workingOutId){
+    // Affine cipher for container 4 where we show the modulus straight away rather than modulus
+    function affineNumCipherMod(inputId, shiftId, sfId, mod, outputTextarea, workingOutId){
         // Reads the value in the Textarea
         let numStr = document.getElementById(inputId).value;
         // Converts it to integer
         let shift = parseInt(document.getElementById(shiftId).value);
+        let sf = parseInt(document.getElementById(sfId).value);
         let workingOut = document.getElementById(workingOutId);
         let outputNum = document.getElementById(outputTextarea);
         // Splits the string into an array whenever there is a space, converts each element in array into string, also gets rid of spaces at beginning and end of string
         let numbers = numStr.trim().split(" ").map(num => Number(num));
         let result = [];
 
-
+        shift = isNaN(shift) ? 0 : shift;
 
         function increaseIndexMod(index) {
             // Ensures the function only processes the elements in the array (so it won't run forever) 
             if (index >= numbers.length) {
                 return; 
             }
-            
+
+            if(isWheelFilled === true){
             // Each number in the array
             let num = numbers[index];
             // Displays which number it will show the working out for
@@ -890,9 +958,9 @@ function encryptText(container, keyInput, inputText, outputText) {
                 workingOut.innerHTML += `<br>Reduced Number: ${num} <br><strong>${numbers[index]} &#8801 ${num} modulo ${mod}</strong>`;
             }
             
-            // Calculating caesar shift
-            let shiftedNum = (num + shift);
-            workingOut.innerHTML += `<br>After shift: (${num} + ${shift}) = ${shiftedNum}`
+            // Calculating affine shift
+            let shiftedNum = (num*sf + shift);
+            workingOut.innerHTML += `<br>After jumping size and shift: ((${num} * ${sf}) + ${shift}) = ${shiftedNum}`
             // workingOut.innerHTML += `<br>After shift and modulus: (${num} + ${shift}) % ${mod} = ${shiftedNum}`;
 
             if (shiftedNum >= mod){
@@ -902,7 +970,7 @@ function encryptText(container, keyInput, inputText, outputText) {
                 while(shiftedNum >= mod){
                    shiftedNum = shiftedNum - mod;
                 }
-                workingOut.innerHTML += `<br>Reduced Number: ${shiftedNum} <br><strong>${num + shift} &#8801 ${shiftedNum} modulo ${mod}</strong> <br><strong>So, ${numbers[index]} + ${shift} &#8801 ${shiftedNum} modulo ${mod}</strong>`;
+                workingOut.innerHTML += `<br>Reduced Number: ${shiftedNum} <br><strong>${num*sf + shift} &#8801 ${shiftedNum} modulo ${mod}</strong> <br><strong>So, ${numbers[index]} + ${shift} &#8801 ${shiftedNum} modulo ${mod}</strong>`;
             }
             else {
                 workingOut.innerHTML +=`<br><strong>So, ${numbers[index]} + ${shift} &#8801 ${shiftedNum} modulo ${mod}</strong>`
@@ -914,6 +982,7 @@ function encryptText(container, keyInput, inputText, outputText) {
 
             setTimeout(() => {increaseIndexMod(index + 1)}, 1000);
         }
+      }
         // Initialisation, starts from index 0
         increaseIndexMod(0)
     }
@@ -926,3 +995,110 @@ function encryptText(container, keyInput, inputText, outputText) {
             }, 1000);
         }
     });
+
+    function subtractionTable() {
+      let bar = parseInt(document.getElementById("subtractionSlider").value);
+      document.getElementById("subtractionValue").textContent = bar;
+      let topRow = document.getElementById("topRow");
+      let bottomRow = document.getElementById("bottomRow");
+      
+      // Initialise the table
+      topRow.innerHTML = "";
+      bottomRow.innerHTML = "";
+  
+      // Creating bottom row
+      for (let i = 0; i < bar; i++) {
+          let cell = document.createElement("td");
+          cell.textContent = i;
+          if (bar > 35){
+            cell.style.fontSize = "14px";
+          }
+          if (bar > 40){
+            cell.style.fontSize = "10px";
+          }
+          bottomRow.appendChild(cell);
+      }
+  
+      // Creating top row
+      for (let i = bar; i < 2 * bar; i++) {
+          let cell = document.createElement("td");
+          cell.textContent = i;
+          if (bar > 35){
+            cell.style.fontSize = "14px";
+          }
+          if (bar > 40){
+            cell.style.fontSize = "10px";
+          }
+          topRow.appendChild(cell);
+  
+      }
+    }
+  subtractionTable()
+
+  function checkAffEncipherNum(inputText, keyInput, sfId, outputText, workingOutId){
+    const messageElement = document.getElementById('messageNum');  
+    let numStr = document.getElementById(inputText).value.trim();
+    // Converts it to integer
+    let shift = parseInt(document.getElementById(keyInput).value);
+    let sf = parseInt(document.getElementById(sfId).value);
+    let modValue = parseInt(document.getElementById("subtractionSlider").value);
+    let workingOut = document.getElementById(workingOutId);
+    let userAttempt = document.getElementById(outputText).value.trim();
+
+    let numbers = numStr.split(" ");
+    let userNumbers = userAttempt.split(" ");
+
+    /* Check if the user's input matches the correct cipher */
+    // Checks for empty inputs
+    if (numStr === "" && userAttempt === "") {
+      // Clear message
+      messageElement.innerHTML = ""; 
+      return;
+    }
+
+
+
+    // Prompt for entering all numbers
+    if (numbers.length !== userNumbers.length) {
+      messageElement.innerHTML = "Please enter both numbers.";
+      return;
+    }
+
+    let isCorrect = true;
+
+
+    for (let i = 0; i < numbers.length; i++) {
+      let inputNum = parseInt(numbers[i]);
+      let outputNum = parseInt(userNumbers[i]);
+
+      if (isNaN(inputNum) || isNaN(outputNum)) {
+        messageElement.innerHTML = "Please type numbers only!";
+        messageElement.style.color = "red";
+        return;
+      }
+
+      let correctEnc = inputNum + shift;
+      while (correctEnc >= modValue) {
+        correctEnc -= modValue;
+      }
+
+      if (correctEnc !== outputNum) {
+        isCorrect = false; 
+      }
+
+    }
+
+      if (isCorrect) {
+        messageElement.innerHTML = "Correct Encipher Text!";
+        messageElement.style.color = "Green";
+        workingOut.innerHTML = `<strong>Magical Steps for Encryption:</strong><br>Input Number: ${num}`;
+      } else {
+          messageElement.innerHTML = "Incorrect Encipher Number. <br>Please try again.";
+          messageElement.style.color = "red";
+      }
+
+    }
+
+
+
+     

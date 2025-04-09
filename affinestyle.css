@@ -72,10 +72,20 @@ p {
   color: black;
 }
 
-#container2, #container3, #container4, #container5 {
-  /* Hides the containers */
-  display: none; 
+table {
+  width: 90%;
+  border-collapse: collapse;
+  margin-top: 10px;
 }
+
+td {
+  border: 1px solid black;
+  padding: 10px;
+  text-align: center;
+  width: 40px;
+  height: 40px;
+}
+ 
 
 #container3 .index {
   font-size: 25px;

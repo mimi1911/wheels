@@ -116,10 +116,6 @@
                 <div class="key-info">
                     <h2>Enter the shift: <br> <input placeholder="0" id="key1_1" class="key" > <br>  </h2>
                 </div>
-                <div class="navbar" style="position: absolute; top: 950px; left: 80px">
-                    <a href="caesarcipher.html">Caesar Cipher</a>
-                    <a href="affinecipher.html">Simple Affine Cipher</a>
-                </div>
             </div>
 
        
@@ -130,7 +126,7 @@
                  <div id="encryptionColour" style="margin-top: 10px;"></div> 
                  <textarea id="inputText2" style = "position: absolute; bottom: 80px; left: 0px" class="fixed-input-copy" placeholder="Enter text that you want to try to encrypt..."  oninput=" highlightInput(container2, inputText2)"></textarea><br> <!--oninput="encryptAffText(container2, key2, sf2, inputText2, userOutputText2)" -->
                 <textarea id="userOutputText2" style="position: absolute; bottom: 80px; right: 0px" class="userEncryptText" placeholder="Try to encrypt the text here..." oninput="checkAffEncipher(container2, key2, sf2, inputText2, userOutputText2)" ></textarea> 
-                <button style="position: absolute; right: 10px; bottom: 235px;" type="submit">Submit</button>
+                
                 <p style="position: absolute; right: 80px; bottom: 300px" id="message" text-align="center"> </p>
                 
                 <!-- Outer Wheel -->
@@ -155,7 +151,7 @@
                 <div class="wheel-wrapper" style = "position: relative; height: 900px"></div>
                     <!-- Highlighted characters -->
                     <div id="encryptionColour" style="margin-top: 10px;"></div> 
-                    <textarea id="inputText3" style = "position: absolute; bottom: 80px; left: 0px" class="fixed-input-copy" placeholder="Enter text that you want to try to encrypt..."  oninput="caesarNumCipherRed('inputText3', 'key3', 26, 'userOutputText3', 'workingOut3'); highlightInput(container3, inputText3)"></textarea><br> 
+                    <textarea id="inputText3" style = "position: absolute; bottom: 80px; left: 0px" class="fixed-input-copy" placeholder="Enter text that you want to try to encrypt..."  oninput="affineNumCipherRed('inputText3', 'key3', 'sf3', 26, 'userOutputText3', 'workingOut3'); highlightInput(container3, inputText3)"></textarea><br> 
                     <p id="workingOut3" style="right: 80px; bottom: 300px; color: blue" text-align="center"></p>
                     <textarea id="userOutputText3" style="position: absolute; bottom: 80px; right: 0px" class="userEncryptText" placeholder="Try to encrypt the text here..." oninput="checkEncipher(container3, key3, inputText3, userOutputText3)" ></textarea>
                    
@@ -169,8 +165,12 @@
                     <div class="scroll">scroll</div>
                     <div class="center-wheel" ></div>
                     </div>
+                    <!-- Scaling Factor -->
+                    <div class="sf-info"> 
+                        <h1>Enter the jump size: <br> <input placeholder="0" id="sf3" class="sf" > <br>  </h1>
+                    </div>
                     <div class="key-info">
-                        <h1>Enter the shift: <br> <input placeholder="0" id="key3" class="key" > <br>  </h1>
+                        <h2>Enter the shift: <br> <input placeholder="0" id="key3" class="key" > <br>  </h2>
                     </div>
                 </div>
         
@@ -179,9 +179,9 @@
                     <div class="wheel-wrapper" style = "position: relative; height: 900px"></div>
                         <!--For highlighted characters -->
                         <div id="encryptionColour" style="margin-top: 10px;"></div> 
-                        <textarea id="inputText4" style = "position: absolute; bottom: 80px; left: 0px" class="fixed-input-copy" placeholder="Enter text that you want to try to encrypt..."  oninput="caesarNumCipherMod('inputText4', 'key4', sliderMod, 'userOutputText4', 'workingOut4');"></textarea><br> 
+                        <textarea id="inputText4" style = "position: absolute; bottom: 80px; left: 0px" class="fixed-input-copy" placeholder="Enter text that you want to try to encrypt..."  oninput="affineNumCipherMod('inputText4', 'key4', 'sf4', sliderMod, 'userOutputText4', 'workingOut4');"></textarea><br> 
                         <p id="workingOut4" style="right: 80px; bottom: 0px; color: blue" text-align="center"></p>
-                        <textarea id="userOutputText4" style="position: absolute; bottom: 80px; right: 0px" class="userEncryptText" placeholder="Try to encrypt the text here..." oninput="checkEncipher(container4, key4, inputText4, userOutputText4)" ></textarea>
+                        <textarea id="userOutputText4" style="position: absolute; bottom: 80px; right: 0px" class="userEncryptText" placeholder="Try to encrypt the text here..." oninput="checkAffEncipher(container5, key5, sf5, inputText4, userOutputText4)" ></textarea>
                        
                         <p style="position: absolute; right: 80px; bottom: 300px" id="message" text-align="center"> </p>
                         <div id="comparisonResult"></div>
@@ -192,15 +192,55 @@
                             <div class="scroll">scroll</div>
                             <div class="center-wheel"></div>
                         </div>
+                        <!-- Scaling Factor -->
+                        <div class="sf-info"> 
+                            <h1>Enter the jump size: <br> <input placeholder="0" id="sf4" class="sf" > <br>  </h1>
+                        </div>
                         <div class="key-info">
-                            <h1>Enter the shift: <br> <input placeholder="0" id="key4" class="key" > <br>  </h1>
+                            <h2>Enter the shift: <br> <input placeholder="0" id="key4" class="key" > <br>  </h2>
                         </div>
                         <div style="position: absolute; left: 40px; bottom: 500px; margin-bottom: 5px;">
                             <label for="segmentSlider"> Modulus (m): </label>
-                            <input type="range" id="segmentSlider" min="2" max="45" value="26" step="1" oninput="changeSegment()">
+                            <input type="range" id="segmentSlider" min="2" max="45" value="26" step="1" oninput="changeAffSegment()">
                             <p style="position: relative; left: -30px; bottom: 0px;">Number of Segments: <span id="segmentValue"> 26</span></p>
                         </div>
                     </div>
+
+                    <!-- Container 5 -->
+
+                    <div id="container5" class="container" style = "position: relative">
+                        <div class="wheel-wrapper" style = "position: relative; height: 900px"></div>
+                           
+                            <textarea id="inputText5" style = "position: absolute; top: 600px; left: 50px" class="fixed-input-copy" placeholder="Enter number that you want to try to encrypt..."  oninput="affineNumCipherMod('inputText5', 'key5', mod, 'userOutputText5', 'workingOut5');"></textarea><br>
+                            <textarea id="userOutputText5" style="position: absolute; top: 600px; right: 85px" class="userEncryptText" placeholder="Try to encrypt the number here..." oninput="checkAffEncipherNum('inputText5', 'key5', 'sf5', 'userOutputText5', 'workingOut5')" ></textarea>
+                    
+                            <p id="workingOut5" style="right: 80px; bottom: 0px; color: blue" text-align="center"></p>
+                            <p style="position: absolute; right: 120px; top: 500px" id="messageNum" text-align="center"> </p>
+                            
+                            <!-- Scaling Factor -->
+                            <div class="sf-info" style="top: 100px; left: 500px; border-color: black;"> 
+                                <h1 style="color: black;">Enter the jump size: <br> <input placeholder="0" id="sf5" class="sf" > <br>  </h1>
+                            </div>
+                            <div class="key-info" style="top: 100px; right: 1000px; border-color: black;">
+                                <h2 style="color: black;">Enter the shift: <br> <input placeholder="0" id="key5" class="key" style="border-color: black;"> <br>  </h2>
+                            </div>
+                            <!-- Subtraction Slider -->
+                            <div style="position: relative; left: 40px; top: -900px; margin-bottom: 5px;">
+                                <label for="subtractionSlider"> Modulus (m): </label>
+                                <input style = "width: 300px;" type="range" id="subtractionSlider" min="2" max="45" value="26" step="0.1" oninput="subtractionTable()">
+                                <p style="position: relative; left: -30px; bottom: 0px;">Number of Segments: <span id="subtractionValue"> 26</span></p>
+                                <table>
+                                    <tbody>
+                                        <tr id="topRow"></tr>
+                                        <tr id="bottomRow"></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="navbar" style="position: absolute; top: 900px; left: 80px">
+                                <a href="caesarcipher.html">Caesar Cipher</a>
+                                <a href="affinecipher.html">Simple Affine Cipher</a>
+                            </div>
+                        </div>
     
     
 
@@ -214,7 +254,8 @@
         affineWheel(container1, charSet, numSegments, 162, sf1, outputText1);
         affineWheel(container1_1, charSet, numSegments, 162, sf1_1, userOutputText1_1);
         affineWheel(container2, charSet, numSegments, 162, sf2, userOutputText2);
-        
+        affineWheel(container3, charSet, numSegments, 162, sf3, userOutputText3);
+        affineWheel(container4, charSet, numSegments, 162, sf4, userOutputText4);
      
     </script>
     
